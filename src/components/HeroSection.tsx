@@ -1,7 +1,23 @@
 
+import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
 
 const HeroSection = () => {
+  const [displayText, setDisplayText] = useState('');
+  const welcomeText = 'Welcome to St. Agnes Parish';
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < welcomeText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(welcomeText.substring(0, currentIndex + 1));
+        setCurrentIndex(prevIndex => prevIndex + 1);
+      }, 100);
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, welcomeText]);
+
   return (
     <section id="home" className="pt-16 min-h-screen flex items-center justify-center bg-gradient-to-b from-skyblue-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -19,8 +35,9 @@ const HeroSection = () => {
             
             {/* Content */}
             <div className="p-8 lg:p-12 flex flex-col justify-center">
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 animate-fade-in">
-                Welcome to St. Agnes Parish
+              <h1 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+                {displayText}
+                <span className="inline-block w-1 h-10 bg-secondary ml-1 animate-pulse"></span>
               </h1>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
