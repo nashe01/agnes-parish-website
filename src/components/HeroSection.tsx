@@ -30,7 +30,6 @@ const HeroSection = () => {
                 alt="St. Agnes with Lamb"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/20"></div>
             </div>
             
             {/* Content */}
