@@ -91,7 +91,7 @@ const MinistriesSection = () => {
             >
               <div 
                 className={`relative w-full h-full transition-transform duration-700 ${
-                  flippedCard === index ? 'rotate-y-180' : ''
+                  flippedCard === index ? '[transform:rotateY(180deg)]' : ''
                 }`}
                 style={{ transformStyle: 'preserve-3d' }}
               >
@@ -144,12 +144,6 @@ const MinistriesSection = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-      `}</style>
     </section>
   );
 };
