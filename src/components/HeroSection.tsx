@@ -26,8 +26,8 @@ const HeroSection = () => {
             {/* Image */}
             <div className="relative h-96 lg:h-auto">
               <img 
-                src="https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=800&h=600&fit=crop" 
-                alt="St. Agnes Church Interior"
+                src="/lovable-uploads/e63e83b4-2497-47f5-8891-0a8482f5ef91.png" 
+                alt="St. Agnes with Lamb"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black/20"></div>
