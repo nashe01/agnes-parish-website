@@ -28,7 +28,7 @@ const HeroSection = () => {
     
     return (
       <>
-        <span className="text-black">{welcome} </span>
+        <span className="text-black dark:text-white">{welcome} </span>
         <span className="bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">{restOfText}</span>
       </>
     );
