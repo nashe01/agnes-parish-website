@@ -22,7 +22,7 @@ const Header = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8 sm:px-10 lg:px-12">
         <div className="flex justify-between items-center h-16">
           {/* Parish Name */}
           <div className="flex items-center">
@@ -30,13 +30,13 @@ const Header = () => {
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            <a href="#home" className="text-secondary hover:text-secondary/80 transition-colors">Home</a>
-            <a href="#services" className="text-secondary hover:text-secondary/80 transition-colors">Services</a>
-            <a href="#ministries" className="text-secondary hover:text-secondary/80 transition-colors">Ministries</a>
-            <a href="#news" className="text-secondary hover:text-secondary/80 transition-colors">News</a>
-            <a href="#contact" className="text-secondary hover:text-secondary/80 transition-colors">Contact</a>
-            <a href="#donations" className="text-secondary hover:text-secondary/80 transition-colors">Donations</a>
+          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
+            <a href="#home" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">Home</a>
+            <a href="#services" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">Services</a>
+            <a href="#ministries" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">Ministries</a>
+            <a href="#news" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">News</a>
+            <a href="#contact" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">Contact</a>
+            <a href="#donations" className="text-secondary font-semibold hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-800 hover:bg-clip-text hover:text-transparent transition-all duration-300">Donations</a>
           </nav>
 
           {/* Login Button */}
