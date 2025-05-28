@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
@@ -17,25 +18,25 @@ const HeroSection = () => {
   }, [currentIndex, welcomeText]);
 
   return (
-    <section id="home" className="pt-12 min-h-screen flex items-center justify-center bg-gradient-to-b from-skyblue-50 to-white">
+    <section id="home" className="pt-20 min-h-screen flex items-center justify-center bg-gradient-to-b from-skyblue-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
-          <div className="relative h-80 lg:h-96">
+          <div className="relative h-72 lg:h-80 overflow-hidden">
             <img 
               src="/lovable-uploads/e63e83b4-2497-47f5-8891-0a8482f5ef91.png" 
               alt="St. Agnes with Lamb"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
             />
           </div>
           
           {/* Content */}
           <div className="flex flex-col justify-center">
-            <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-2">
+            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-2">
               {displayText}
-              <span className="inline-block w-1 h-8 bg-sky-600 ml-1 animate-pulse"></span>
+              <span className="inline-block w-1 h-10 bg-sky-600 ml-1 animate-pulse"></span>
             </h1>
-            <h2 className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-6 text-center">
+            <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-6 text-center">
               Archdiocese of Harare
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
