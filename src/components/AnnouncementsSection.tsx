@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 
 const AnnouncementsSection = () => {
@@ -66,13 +65,13 @@ const AnnouncementsSection = () => {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Announcements & Events</h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">Announcements & Events</h2>
           <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
         </div>
 
         {/* Upcoming Events */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Upcoming Events</h3>
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {upcomingEvents.map((event, index) => (
               <Card key={index} className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -89,7 +88,7 @@ const AnnouncementsSection = () => {
 
         {/* Infinite Scrolling Announcements */}
         <div className="mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Parish Announcements</h3>
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Parish Announcements</h3>
         </div>
         
         <div className="relative overflow-hidden">

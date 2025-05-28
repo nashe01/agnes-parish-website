@@ -1,5 +1,5 @@
-
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const NewsSection = () => {
   const news = [
@@ -82,7 +82,7 @@ const NewsSection = () => {
     <section id="news" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">News & Updates</h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">News & Updates</h2>
           <p className="text-xl text-gray-600">Stay connected with parish life and activities</p>
         </div>
 
@@ -134,7 +134,7 @@ const NewsSection = () => {
 
         {/* Photo Gallery with Infinite Scroll */}
         <div className="mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Photo Gallery</h3>
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Photo Gallery</h3>
         </div>
         
         <div className="relative overflow-hidden">
@@ -156,6 +156,19 @@ const NewsSection = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Gallery Button */}
+        <div className="text-center mt-8">
+          <Button 
+            className="bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 transition-all duration-300 px-8 py-3"
+            onClick={() => {
+              // Navigate to gallery page - for now just scroll to top
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            View Full Gallery
+          </Button>
         </div>
       </div>
     </section>
