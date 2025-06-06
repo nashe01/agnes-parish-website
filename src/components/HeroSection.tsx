@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
@@ -41,7 +40,7 @@ const HeroSection = () => {
             <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4 text-center">
               Archdiocese of Harare
             </h2>
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-center">
               {renderStyledText()}
               <span className="inline-block w-1 h-12 bg-sky-600 ml-1 animate-pulse"></span>
             </h1>
