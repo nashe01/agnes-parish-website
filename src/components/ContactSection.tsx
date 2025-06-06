@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
@@ -55,19 +54,19 @@ const ContactSection = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-900">Monday - Thursday</span>
-                    <span className="text-gray-600">9:00 AM - 5:00 PM</span>
+                    <span className="text-black">9:00 AM - 5:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-900">Friday</span>
-                    <span className="text-gray-600">9:00 AM - 12:00 PM</span>
+                    <span className="text-black">9:00 AM - 12:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-900">Saturday</span>
-                    <span className="text-gray-600">By Appointment</span>
+                    <span className="text-black">By Appointment</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium text-gray-900">Sunday</span>
-                    <span className="text-gray-600">Closed</span>
+                    <span className="text-black">Closed</span>
                   </div>
                 </div>
               </CardContent>
@@ -107,16 +106,18 @@ const ContactSection = () => {
             <Card className="shadow-lg h-full">
               <CardContent className="p-8 h-full">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Directions</h3>
-                <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-16 h-16 text-secondary mx-auto mb-4" />
-                    <p className="text-gray-600">Interactive map would be embedded here</p>
-                    <p className="text-sm text-gray-500 mt-2">
-                      Located in the heart of the community<br />
-                      Parking available on site
-                    </p>
-                  </div>
+                <div className="rounded-lg overflow-hidden h-96">
+                  <iframe
+                    title="Zengeza 3 Roman Catholic Church Location"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.553148050983!2d31.0578896!3d-18.0074889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x193199c10e8c6935%3A0x8e85a27ae711ba25!2sZengeza%203%20Roman%20Catholic%20Church%2C%20Chitungwiza!5e0!3m2!1sen!2szw!4v1717680000000"
+                  ></iframe>
                 </div>
+
                 <div className="mt-6">
                   <h4 className="font-semibold text-gray-900 mb-3">Getting Here</h4>
                   <div className="space-y-2 text-gray-600 text-sm">
@@ -136,3 +137,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
