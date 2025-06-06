@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
   const [displayText, setDisplayText] = useState('');
-  const welcomeText = 'Welcome to St Agnes Parish';
+  const welcomeText = 'St Agnes Parish';
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -18,28 +18,17 @@ const HeroSection = () => {
   }, [currentIndex, welcomeText]);
 
   const renderStyledText = () => {
-    const words = displayText.split(' ');
-    if (words.length === 1) {
-      return <span className="text-black">{displayText}</span>;
-    }
-    
-    const welcome = words[0];
-    const restOfText = words.slice(1).join(' ');
-    
     return (
-      <>
-        <span className="text-black dark:text-white">{welcome} </span>
-        <span className="bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">{restOfText}</span>
-      </>
+      <span className="bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">{displayText}</span>
     );
   };
 
   return (
-    <section id="home" className="pt-24 min-h-screen flex items-center justify-center bg-gradient-to-b from-skyblue-50 to-white">
+    <section id="home" className="pt-32 min-h-screen flex items-center justify-center bg-gradient-to-b from-skyblue-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
-          <div className="relative h-72 lg:h-80 overflow-hidden">
+          <div className="relative h-64 lg:h-72 overflow-hidden">
             <img 
               src="/lovable-uploads/e63e83b4-2497-47f5-8891-0a8482f5ef91.png" 
               alt="St. Agnes with Lamb"
@@ -49,13 +38,13 @@ const HeroSection = () => {
           
           {/* Content */}
           <div className="flex flex-col justify-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-2">
+            <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4 text-center">
+              Archdiocese of Harare
+            </h2>
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
               {renderStyledText()}
               <span className="inline-block w-1 h-12 bg-sky-600 ml-1 animate-pulse"></span>
             </h1>
-            <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-6 text-center">
-              Archdiocese of Harare
-            </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Our parish has been serving the community with faith, 
