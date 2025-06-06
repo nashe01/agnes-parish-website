@@ -11,18 +11,15 @@ const HeroSection = () => {
         setDisplayText(welcomeText.substring(0, currentIndex + 1));
         setCurrentIndex(prevIndex => prevIndex + 1);
       }, 100);
-
       return () => clearTimeout(timeout);
     }
   }, [currentIndex, welcomeText]);
 
-  const renderStyledText = () => {
-    return (
-      <span className="bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
-        {displayText}
-      </span>
-    );
-  };
+  const renderStyledText = () => (
+    <span className="bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
+      {displayText}
+    </span>
+  );
 
   return (
     <section
@@ -32,7 +29,7 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Image */}
-          <div className="relative h-80 lg:h-[28rem] overflow-hidden flex items-center justify-center">
+          <div className="relative h-[28rem] lg:h-[38rem] -mt-24 overflow-hidden flex items-center justify-center">
             <img
               src="/lovable-uploads/e63e83b4-2497-47f5-8891-0a8482f5ef91.png"
               alt="St. Agnes with Lamb"
@@ -82,3 +79,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
