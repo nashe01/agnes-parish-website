@@ -26,20 +26,50 @@ const Admin = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg">Loading admin access...</div>
       </div>
     );
   }
 
-  if (!user || !isAdmin) {
-    return null;
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold mb-4">Access Denied</h2>
+          <p className="text-gray-600 mb-4">Please log in to access the admin panel.</p>
+          <Button onClick={() => navigate('/auth')}>Go to Login</Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold mb-4">Admin Access Required</h2>
+          <p className="text-gray-600 mb-4">You don't have admin privileges to access this panel.</p>
+          <div className="flex gap-4 justify-center">
+            <Button onClick={() => navigate('/')} variant="outline">
+              Go to Homepage
+            </Button>
+            <Button onClick={signOut} variant="destructive">
+              Sign Out
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Parish Admin Panel</h1>
+          <div>
+            <h1 className="text-3xl font-bold">Parish Admin Panel</h1>
+            <p className="text-gray-600 mt-2">Welcome, {user.email}! Manage your parish content here.</p>
+          </div>
           <div className="flex gap-4">
             <Button onClick={() => navigate('/')} variant="outline">
               View Website

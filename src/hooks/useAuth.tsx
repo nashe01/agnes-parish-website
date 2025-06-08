@@ -22,21 +22,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    console.log('Setting up auth state listener...');
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
+          console.log('Checking admin status for user:', session.user.id);
           setTimeout(async () => {
-            const { data } = await supabase
-              .from('admin_users')
-              .select('*')
-              .eq('user_id', session.user.id)
-              .eq('is_active', true)
-              .single();
-            
-            setIsAdmin(!!data);
+            try {
+              const { data, error } = await supabase
+                .from('admin_users')
+                .select('*')
+                .eq('user_id', session.user.id)
+                .eq('is_active', true)
+                .single();
+              
+              if (error) {
+                console.log('Admin check error:', error);
+              } else {
+                console.log('Admin check result:', data);
+              }
+              
+              setIsAdmin(!!data);
+            } catch (err) {
+              console.error('Error checking admin status:', err);
+              setIsAdmin(false);
+            }
           }, 0);
         } else {
           setIsAdmin(false);
@@ -47,6 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
 
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Initial session:', session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);
