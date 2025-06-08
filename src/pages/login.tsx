@@ -64,7 +64,7 @@ const Login = () => {
         </form>
 
         {isLoggingIn && (
-          <p className="mt-4 text-center text-sm text-skyblue-700 animate-fade-in opacity-0 animate-[fade-in_0.8s_ease-in-out_forwards]">
+          <p className="mt-4 text-center text-sm text-skyblue-700 opacity-0 animate-[fade-in_0.8s_ease-in-out_forwards]">
             Logging in...
           </p>
         )}
