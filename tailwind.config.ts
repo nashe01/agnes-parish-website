@@ -8,7 +8,6 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -104,6 +103,14 @@ export default {
         'flip': {
           '0%': { transform: 'rotateY(0)' },
           '100%': { transform: 'rotateY(180deg)' }
+        },
+        'slide-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-50%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' }
+        },
+        'fade-out-up': {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(-20px)' }
         }
       },
       animation: {
@@ -112,7 +119,9 @@ export default {
         'fade-in': 'fade-in 0.6s ease-out',
         'scroll-left': 'scroll-left 30s linear infinite',
         'scroll-right': 'scroll-right 30s linear infinite',
-        'flip': 'flip 0.6s ease-in-out'
+        'flip': 'flip 0.6s ease-in-out',
+        'slide-in-left': 'slide-in-left 0.5s ease-out forwards',
+        'fade-out-up': 'fade-out-up 0.5s ease-in forwards'
       }
     }
   },
