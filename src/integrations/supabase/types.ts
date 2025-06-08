@@ -9,13 +9,291 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      admin_users: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      announcements: {
+        Row: {
+          created_at: string
+          date_text: string
+          description: string
+          display_order: number
+          id: string
+          is_active: boolean
+          is_featured: boolean
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date_text: string
+          description: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date_text?: string
+          description?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          caption: string
+          created_at: string
+          display_order: number
+          id: string
+          is_active: boolean
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          caption: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          caption?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      hero_content: {
+        Row: {
+          archdiocese: string
+          created_at: string
+          hero_image_url: string | null
+          id: string
+          parish_name: string
+          updated_at: string
+          welcome_text: string
+        }
+        Insert: {
+          archdiocese?: string
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          parish_name?: string
+          updated_at?: string
+          welcome_text: string
+        }
+        Update: {
+          archdiocese?: string
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          parish_name?: string
+          updated_at?: string
+          welcome_text?: string
+        }
+        Relationships: []
+      }
+      mass_schedules: {
+        Row: {
+          created_at: string
+          day_type: string
+          display_order: number
+          id: string
+          is_active: boolean
+          special_note: string | null
+          times: string[]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          day_type: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          special_note?: string | null
+          times: string[]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          day_type?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          special_note?: string | null
+          times?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ministries: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          how_to_join: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          location: string
+          meeting_time: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          how_to_join: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          location: string
+          meeting_time: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          how_to_join?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          location?: string
+          meeting_time?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      news_articles: {
+        Row: {
+          category: string
+          created_at: string
+          date: string
+          display_order: number
+          excerpt: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          size: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          date: string
+          display_order?: number
+          excerpt: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          size?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          date?: string
+          display_order?: number
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          size?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sacraments: {
+        Row: {
+          created_at: string
+          description: string
+          display_order: number
+          id: string
+          is_active: boolean
+          name: string
+          requirement: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name: string
+          requirement: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name?: string
+          requirement?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

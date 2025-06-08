@@ -1,7 +1,10 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const NewsSection = () => {
+  const navigate = useNavigate();
+  
   const news = [
     {
       title: "Parish Renovation Project Completed",
@@ -162,10 +165,7 @@ const NewsSection = () => {
         <div className="text-center mt-8">
           <Button 
             className="bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 transition-all duration-300 px-8 py-3"
-            onClick={() => {
-              // Navigate to gallery page - for now just scroll to top
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={() => navigate('/gallery')}
           >
             View Full Gallery
           </Button>
