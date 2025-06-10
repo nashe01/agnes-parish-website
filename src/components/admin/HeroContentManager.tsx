@@ -9,10 +9,10 @@ import { useToast } from '@/hooks/use-toast';
 
 interface HeroContent {
   id: string;
-  parish_name: string;
-  archdiocese: string;
-  welcome_text: string;
-  hero_image_url?: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  background_image_url?: string;
 }
 
 const HeroContentManager = () => {
@@ -28,10 +28,23 @@ const HeroContentManager = () => {
     const { data, error } = await supabase
       .from('hero_content')
       .select('*')
-      .single();
+      .maybeSingle();
     
     if (data) {
       setContent(data);
+    } else if (!error) {
+      // Create default content if none exists
+      const defaultContent = {
+        title: 'Welcome to Our Parish',
+        subtitle: 'Join us in worship and community',
+        description: 'Experience faith, fellowship, and spiritual growth in our welcoming community.'
+      };
+      const { data: newData } = await supabase
+        .from('hero_content')
+        .insert(defaultContent)
+        .select()
+        .single();
+      if (newData) setContent(newData);
     }
   };
 
@@ -43,11 +56,7 @@ const HeroContentManager = () => {
     const { error } = await supabase
       .from('hero_content')
       .upsert({
-        id: content.id,
-        parish_name: content.parish_name,
-        archdiocese: content.archdiocese,
-        welcome_text: content.welcome_text,
-        hero_image_url: content.hero_image_url,
+        ...content,
         updated_at: new Date().toISOString(),
       });
 
@@ -73,36 +82,36 @@ const HeroContentManager = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <Label htmlFor="parish_name">Parish Name</Label>
+        <Label htmlFor="title">Title</Label>
         <Input
-          id="parish_name"
-          value={content.parish_name}
-          onChange={(e) => setContent({ ...content, parish_name: e.target.value })}
+          id="title"
+          value={content.title}
+          onChange={(e) => setContent({ ...content, title: e.target.value })}
         />
       </div>
       <div>
-        <Label htmlFor="archdiocese">Archdiocese</Label>
+        <Label htmlFor="subtitle">Subtitle</Label>
         <Input
-          id="archdiocese"
-          value={content.archdiocese}
-          onChange={(e) => setContent({ ...content, archdiocese: e.target.value })}
+          id="subtitle"
+          value={content.subtitle}
+          onChange={(e) => setContent({ ...content, subtitle: e.target.value })}
         />
       </div>
       <div>
-        <Label htmlFor="welcome_text">Welcome Text</Label>
+        <Label htmlFor="description">Description</Label>
         <Textarea
-          id="welcome_text"
-          value={content.welcome_text}
-          onChange={(e) => setContent({ ...content, welcome_text: e.target.value })}
-          rows={5}
+          id="description"
+          value={content.description}
+          onChange={(e) => setContent({ ...content, description: e.target.value })}
+          rows={4}
         />
       </div>
       <div>
-        <Label htmlFor="hero_image_url">Hero Image URL</Label>
+        <Label htmlFor="background_image_url">Background Image URL</Label>
         <Input
-          id="hero_image_url"
-          value={content.hero_image_url || ''}
-          onChange={(e) => setContent({ ...content, hero_image_url: e.target.value })}
+          id="background_image_url"
+          value={content.background_image_url || ''}
+          onChange={(e) => setContent({ ...content, background_image_url: e.target.value })}
           placeholder="https://example.com/image.jpg"
         />
       </div>
