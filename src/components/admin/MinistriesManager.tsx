@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Trash2, Edit } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface Ministry {
   id: string;
@@ -47,12 +48,34 @@ const MinistriesManager = () => {
     if (!editingMinistry) return;
 
     setIsLoading(true);
+    
+    const ministryData = editingMinistry.id 
+      ? {
+          id: editingMinistry.id,
+          name: editingMinistry.name,
+          image_url: editingMinistry.image_url,
+          meeting_time: editingMinistry.meeting_time,
+          location: editingMinistry.location,
+          how_to_join: editingMinistry.how_to_join,
+          description: editingMinistry.description,
+          display_order: editingMinistry.display_order,
+          is_active: editingMinistry.is_active,
+          updated_at: new Date().toISOString(),
+        }
+      : {
+          name: editingMinistry.name,
+          image_url: editingMinistry.image_url,
+          meeting_time: editingMinistry.meeting_time,
+          location: editingMinistry.location,
+          how_to_join: editingMinistry.how_to_join,
+          description: editingMinistry.description,
+          display_order: editingMinistry.display_order,
+          is_active: editingMinistry.is_active,
+        };
+
     const { error } = await supabase
       .from('ministries')
-      .upsert({
-        ...editingMinistry,
-        updated_at: new Date().toISOString(),
-      });
+      .upsert(ministryData);
 
     if (error) {
       toast({
@@ -106,6 +129,12 @@ const MinistriesManager = () => {
     });
   };
 
+  const handleImageUpload = (url: string) => {
+    if (editingMinistry) {
+      setEditingMinistry({ ...editingMinistry, image_url: url });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -136,15 +165,10 @@ const MinistriesManager = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={editingMinistry.image_url || ''}
-                  onChange={(e) => setEditingMinistry({ 
-                    ...editingMinistry, 
-                    image_url: e.target.value 
-                  })}
-                  placeholder="https://example.com/image.jpg"
+                <FileUpload
+                  label="Ministry Image"
+                  onFileUpload={handleImageUpload}
+                  currentFile={editingMinistry.image_url}
                 />
               </div>
               <div>

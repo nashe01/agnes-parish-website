@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Trash2, Edit } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface NewsArticle {
   id: string;
@@ -47,12 +48,34 @@ const NewsManager = () => {
     if (!editingArticle) return;
 
     setIsLoading(true);
+    
+    const articleData = editingArticle.id 
+      ? {
+          id: editingArticle.id,
+          title: editingArticle.title,
+          excerpt: editingArticle.excerpt,
+          image_url: editingArticle.image_url,
+          date: editingArticle.date,
+          category: editingArticle.category,
+          size: editingArticle.size,
+          display_order: editingArticle.display_order,
+          is_active: editingArticle.is_active,
+          updated_at: new Date().toISOString(),
+        }
+      : {
+          title: editingArticle.title,
+          excerpt: editingArticle.excerpt,
+          image_url: editingArticle.image_url,
+          date: editingArticle.date,
+          category: editingArticle.category,
+          size: editingArticle.size,
+          display_order: editingArticle.display_order,
+          is_active: editingArticle.is_active,
+        };
+
     const { error } = await supabase
       .from('news_articles')
-      .upsert({
-        ...editingArticle,
-        updated_at: new Date().toISOString(),
-      });
+      .upsert(articleData);
 
     if (error) {
       toast({
@@ -106,6 +129,12 @@ const NewsManager = () => {
     });
   };
 
+  const handleImageUpload = (url: string) => {
+    if (editingArticle) {
+      setEditingArticle({ ...editingArticle, image_url: url });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -149,15 +178,10 @@ const NewsManager = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={editingArticle.image_url || ''}
-                  onChange={(e) => setEditingArticle({ 
-                    ...editingArticle, 
-                    image_url: e.target.value 
-                  })}
-                  placeholder="https://example.com/image.jpg"
+                <FileUpload
+                  label="Article Image"
+                  onFileUpload={handleImageUpload}
+                  currentFile={editingArticle.image_url}
                 />
               </div>
               <div>

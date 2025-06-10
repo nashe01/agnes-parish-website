@@ -43,12 +43,27 @@ const GalleryManager = () => {
     if (!editingPhoto) return;
 
     setIsLoading(true);
+    
+    // For new photos, don't include the id field
+    const photoData = editingPhoto.id 
+      ? {
+          id: editingPhoto.id,
+          url: editingPhoto.url,
+          caption: editingPhoto.caption,
+          display_order: editingPhoto.display_order,
+          is_active: editingPhoto.is_active,
+          updated_at: new Date().toISOString(),
+        }
+      : {
+          url: editingPhoto.url,
+          caption: editingPhoto.caption,
+          display_order: editingPhoto.display_order,
+          is_active: editingPhoto.is_active,
+        };
+
     const { error } = await supabase
       .from('gallery_photos')
-      .upsert({
-        ...editingPhoto,
-        updated_at: new Date().toISOString(),
-      });
+      .upsert(photoData);
 
     if (error) {
       toast({
@@ -90,7 +105,7 @@ const GalleryManager = () => {
 
   const createNew = () => {
     setEditingPhoto({
-      id: '',
+      id: '', // Empty string for new photos
       url: '',
       caption: '',
       display_order: photos.length,
