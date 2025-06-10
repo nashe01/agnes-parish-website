@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import FileUpload from './FileUpload';
 
 interface HeroContent {
   id: string;
@@ -75,6 +76,12 @@ const HeroContentManager = () => {
     setIsLoading(false);
   };
 
+  const handleImageUpload = (url: string) => {
+    if (content) {
+      setContent({ ...content, hero_image_url: url });
+    }
+  };
+
   if (!content) {
     return <div>Loading...</div>;
   }
@@ -107,12 +114,10 @@ const HeroContentManager = () => {
         />
       </div>
       <div>
-        <Label htmlFor="hero_image_url">Hero Image URL</Label>
-        <Input
-          id="hero_image_url"
-          value={content.hero_image_url || ''}
-          onChange={(e) => setContent({ ...content, hero_image_url: e.target.value })}
-          placeholder="https://example.com/image.jpg"
+        <FileUpload
+          label="Hero Image"
+          onFileUpload={handleImageUpload}
+          currentFile={content.hero_image_url}
         />
       </div>
       <Button type="submit" disabled={isLoading}>

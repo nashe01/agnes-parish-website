@@ -1,67 +1,37 @@
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Ministry {
+  id: string;
+  name: string;
+  description: string;
+  image_url?: string;
+  meeting_time: string;
+  location: string;
+  how_to_join: string;
+}
 
 const MinistriesSection = () => {
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
+  const [ministries, setMinistries] = useState<Ministry[]>([]);
 
-  const ministries = [
-    {
-      name: "Youth Ministry",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop",
-      meetingTime: "Fridays 7:00 PM",
-      location: "Parish Hall",
-      howToJoin: "Contact Fr. Michael or visit us on Friday evenings. Open to ages 18-35."
-    },
-    {
-      name: "Choir Ministry",
-      image: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=800&h=600&fit=crop",
-      meetingTime: "Sundays 8:00 AM & Thursdays 7:00 PM",
-      location: "Church Sanctuary",
-      howToJoin: "Auditions held monthly. Contact the music director for more information."
-    },
-    {
-      name: "Children's Liturgy",
-      image: "https://images.unsplash.com/photo-1560541919-eb5c2da6a5a3?w=800&h=600&fit=crop",
-      meetingTime: "Sundays during 9:00 AM Mass",
-      location: "Children's Chapel",
-      howToJoin: "Volunteer training provided. Contact the Religious Education coordinator."
-    },
-    {
-      name: "Knights of Columbus",
-      image: "https://images.unsplash.com/photo-1607703703674-df96af81dffa?w=800&h=600&fit=crop",
-      meetingTime: "2nd Tuesday 7:30 PM",
-      location: "Knights Hall",
-      howToJoin: "Catholic men 18+ welcome. Contact Grand Knight for membership information."
-    },
-    {
-      name: "Ladies Guild",
-      image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=800&h=600&fit=crop",
-      meetingTime: "1st Saturday 10:00 AM",
-      location: "Parish Center",
-      howToJoin: "All women welcome. Contact guild president for meeting details."
-    },
-    {
-      name: "Altar Servers",
-      image: "https://images.unsplash.com/photo-1586516439128-ea7a5ade0a11?w=800&h=600&fit=crop",
-      meetingTime: "Training as needed",
-      location: "Church Sanctuary",
-      howToJoin: "Boys and girls grades 4+ welcome. Training provided monthly."
-    },
-    {
-      name: "Ushers Ministry",
-      image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=800&h=600&fit=crop",
-      meetingTime: "All Masses",
-      location: "Church Entrance",
-      howToJoin: "Contact head usher. Training provided for new volunteers."
-    },
-    {
-      name: "Lectors Ministry",
-      image: "https://images.unsplash.com/photo-1530367899272-065937aaba7d?w=800&h=600&fit=crop",
-      meetingTime: "Monthly training sessions",
-      location: "Church Sanctuary",
-      howToJoin: "Must complete lector training program. Contact liturgy coordinator."
+  useEffect(() => {
+    fetchMinistries();
+  }, []);
+
+  const fetchMinistries = async () => {
+    const { data } = await supabase
+      .from('ministries')
+      .select('*')
+      .eq('is_active', true)
+      .order('display_order');
+    
+    if (data) {
+      setMinistries(data);
     }
-  ];
+  };
 
   const handleCardHover = (index: number) => {
     setFlippedCard(index);
@@ -70,6 +40,22 @@ const MinistriesSection = () => {
   const handleCardLeave = () => {
     setFlippedCard(null);
   };
+
+  if (ministries.length === 0) {
+    return (
+      <section id="ministries" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-secondary mb-4">Ministries & Guilds</h2>
+            <p className="text-xl text-gray-600">Discover opportunities to serve and grow in faith</p>
+          </div>
+          <div className="text-center text-gray-600">
+            <p>No ministries available at the moment.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="ministries" className="py-20 bg-white">
@@ -82,7 +68,7 @@ const MinistriesSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {ministries.map((ministry, index) => (
             <div 
-              key={index}
+              key={ministry.id}
               className="relative h-64 cursor-pointer"
               style={{ perspective: '1000px' }}
               onMouseEnter={() => handleCardHover(index)}
@@ -101,7 +87,7 @@ const MinistriesSection = () => {
                 >
                   <div className="relative h-full">
                     <img 
-                      src={ministry.image} 
+                      src={ministry.image_url || "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop"} 
                       alt={ministry.name}
                       className="w-full h-full object-cover"
                     />
@@ -125,7 +111,7 @@ const MinistriesSection = () => {
                     <div className="space-y-3 text-sm">
                       <div>
                         <p className="font-semibold">Meeting Time:</p>
-                        <p>{ministry.meetingTime}</p>
+                        <p>{ministry.meeting_time}</p>
                       </div>
                       <div>
                         <p className="font-semibold">Location:</p>
@@ -133,7 +119,7 @@ const MinistriesSection = () => {
                       </div>
                       <div>
                         <p className="font-semibold">How to Join:</p>
-                        <p className="text-xs">{ministry.howToJoin}</p>
+                        <p className="text-xs">{ministry.how_to_join}</p>
                       </div>
                     </div>
                   </div>

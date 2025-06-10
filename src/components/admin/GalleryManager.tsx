@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Trash2, Edit } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface GalleryPhoto {
   id: string;
@@ -97,6 +98,12 @@ const GalleryManager = () => {
     });
   };
 
+  const handleImageUpload = (url: string) => {
+    if (editingPhoto) {
+      setEditingPhoto({ ...editingPhoto, url });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -115,16 +122,10 @@ const GalleryManager = () => {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="url">Image URL</Label>
-                <Input
-                  id="url"
-                  value={editingPhoto.url}
-                  onChange={(e) => setEditingPhoto({ 
-                    ...editingPhoto, 
-                    url: e.target.value 
-                  })}
-                  placeholder="https://example.com/photo.jpg"
-                  required
+                <FileUpload
+                  label="Photo"
+                  onFileUpload={handleImageUpload}
+                  currentFile={editingPhoto.url}
                 />
               </div>
               <div>
@@ -140,7 +141,7 @@ const GalleryManager = () => {
                 />
               </div>
               <div className="flex gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || !editingPhoto.url}>
                   {isLoading ? 'Saving...' : 'Save'}
                 </Button>
                 <Button 
