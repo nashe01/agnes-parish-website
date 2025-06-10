@@ -9,10 +9,10 @@ import { useToast } from '@/hooks/use-toast';
 
 interface HeroContent {
   id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  background_image_url?: string;
+  parish_name: string;
+  welcome_text: string;
+  archdiocese: string;
+  hero_image_url?: string;
 }
 
 const HeroContentManager = () => {
@@ -35,9 +35,9 @@ const HeroContentManager = () => {
     } else if (!error) {
       // Create default content if none exists
       const defaultContent = {
-        title: 'Welcome to Our Parish',
-        subtitle: 'Join us in worship and community',
-        description: 'Experience faith, fellowship, and spiritual growth in our welcoming community.'
+        parish_name: 'St Agnes Parish',
+        welcome_text: 'Experience faith, fellowship, and spiritual growth in our welcoming community.',
+        archdiocese: 'Archdiocese of Harare'
       };
       const { data: newData } = await supabase
         .from('hero_content')
@@ -82,36 +82,36 @@ const HeroContentManager = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="parish_name">Parish Name</Label>
         <Input
-          id="title"
-          value={content.title}
-          onChange={(e) => setContent({ ...content, title: e.target.value })}
+          id="parish_name"
+          value={content.parish_name}
+          onChange={(e) => setContent({ ...content, parish_name: e.target.value })}
         />
       </div>
       <div>
-        <Label htmlFor="subtitle">Subtitle</Label>
+        <Label htmlFor="archdiocese">Archdiocese</Label>
         <Input
-          id="subtitle"
-          value={content.subtitle}
-          onChange={(e) => setContent({ ...content, subtitle: e.target.value })}
+          id="archdiocese"
+          value={content.archdiocese}
+          onChange={(e) => setContent({ ...content, archdiocese: e.target.value })}
         />
       </div>
       <div>
-        <Label htmlFor="description">Description</Label>
+        <Label htmlFor="welcome_text">Welcome Text</Label>
         <Textarea
-          id="description"
-          value={content.description}
-          onChange={(e) => setContent({ ...content, description: e.target.value })}
+          id="welcome_text"
+          value={content.welcome_text}
+          onChange={(e) => setContent({ ...content, welcome_text: e.target.value })}
           rows={4}
         />
       </div>
       <div>
-        <Label htmlFor="background_image_url">Background Image URL</Label>
+        <Label htmlFor="hero_image_url">Hero Image URL</Label>
         <Input
-          id="background_image_url"
-          value={content.background_image_url || ''}
-          onChange={(e) => setContent({ ...content, background_image_url: e.target.value })}
+          id="hero_image_url"
+          value={content.hero_image_url || ''}
+          onChange={(e) => setContent({ ...content, hero_image_url: e.target.value })}
           placeholder="https://example.com/image.jpg"
         />
       </div>
