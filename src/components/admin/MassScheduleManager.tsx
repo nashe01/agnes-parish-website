@@ -13,12 +13,13 @@ interface MassSchedule {
   day_type: string;
   times: string[];
   special_note?: string;
-  display_order: number;
   is_active: boolean;
+  display_order: number;
 }
 
 const MassScheduleManager = () => {
   const [schedules, setSchedules] = useState<MassSchedule[]>([]);
+  const [editingSchedule, setEditingSchedule] = useState<MassSchedule | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -57,6 +58,7 @@ const MassScheduleManager = () => {
         title: "Success",
         description: "Mass schedule updated successfully!",
       });
+      setEditingSchedule(null);
       fetchSchedules();
     }
     setIsLoading(false);
@@ -83,118 +85,132 @@ const MassScheduleManager = () => {
     }
   };
 
-  const addNewSchedule = () => {
-    const newSchedule: MassSchedule = {
+  const createNew = () => {
+    setEditingSchedule({
       id: '',
       day_type: '',
       times: [''],
       special_note: '',
-      display_order: schedules.length + 1,
       is_active: true,
-    };
-    setSchedules([...schedules, newSchedule]);
+      display_order: schedules.length,
+    });
   };
 
-  const updateSchedule = (index: number, field: keyof MassSchedule, value: any) => {
-    const updated = [...schedules];
-    updated[index] = { ...updated[index], [field]: value };
-    setSchedules(updated);
+  const updateTimes = (index: number, value: string) => {
+    if (!editingSchedule) return;
+    const newTimes = [...editingSchedule.times];
+    newTimes[index] = value;
+    setEditingSchedule({ ...editingSchedule, times: newTimes });
   };
 
-  const updateTime = (scheduleIndex: number, timeIndex: number, value: string) => {
-    const updated = [...schedules];
-    updated[scheduleIndex].times[timeIndex] = value;
-    setSchedules(updated);
+  const addTime = () => {
+    if (!editingSchedule) return;
+    setEditingSchedule({ ...editingSchedule, times: [...editingSchedule.times, ''] });
   };
 
-  const addTime = (scheduleIndex: number) => {
-    const updated = [...schedules];
-    updated[scheduleIndex].times.push('');
-    setSchedules(updated);
-  };
-
-  const removeTime = (scheduleIndex: number, timeIndex: number) => {
-    const updated = [...schedules];
-    updated[scheduleIndex].times.splice(timeIndex, 1);
-    setSchedules(updated);
+  const removeTime = (index: number) => {
+    if (!editingSchedule) return;
+    const newTimes = editingSchedule.times.filter((_, i) => i !== index);
+    setEditingSchedule({ ...editingSchedule, times: newTimes });
   };
 
   return (
     <div className="space-y-4">
-      <Button onClick={addNewSchedule} className="mb-4">
+      <Button onClick={createNew} className="mb-4">
         <Plus className="w-4 h-4 mr-2" />
         Add New Schedule
       </Button>
 
-      {schedules.map((schedule, index) => (
-        <Card key={schedule.id || index}>
+      {editingSchedule && (
+        <Card>
           <CardHeader>
-            <CardTitle className="flex justify-between items-center">
-              <span>Mass Schedule {index + 1}</span>
-              {schedule.id && (
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => handleDelete(schedule.id)}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              )}
-            </CardTitle>
+            <CardTitle>{editingSchedule.id ? 'Edit' : 'Add'} Mass Schedule</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <Label>Day Type</Label>
               <Input
-                value={schedule.day_type}
-                onChange={(e) => updateSchedule(index, 'day_type', e.target.value)}
-                placeholder="e.g., Sunday, Monday-Friday"
+                value={editingSchedule.day_type}
+                onChange={(e) => setEditingSchedule({ ...editingSchedule, day_type: e.target.value })}
+                placeholder="e.g., Sunday, Weekdays, Saturday"
               />
             </div>
-            
             <div>
               <Label>Times</Label>
-              {schedule.times.map((time, timeIndex) => (
-                <div key={timeIndex} className="flex gap-2 mb-2">
+              {editingSchedule.times.map((time, index) => (
+                <div key={index} className="flex gap-2 mb-2">
                   <Input
                     value={time}
-                    onChange={(e) => updateTime(index, timeIndex, e.target.value)}
+                    onChange={(e) => updateTimes(index, e.target.value)}
                     placeholder="e.g., 9:00 AM"
                   />
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => removeTime(index, timeIndex)}
-                    disabled={schedule.times.length === 1}
+                    size="sm"
+                    onClick={() => removeTime(index)}
                   >
                     Remove
                   </Button>
                 </div>
               ))}
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => addTime(index)}
-              >
+              <Button type="button" variant="outline" onClick={addTime}>
                 Add Time
               </Button>
             </div>
-
             <div>
-              <Label>Special Note (Optional)</Label>
+              <Label>Special Note</Label>
               <Input
-                value={schedule.special_note || ''}
-                onChange={(e) => updateSchedule(index, 'special_note', e.target.value)}
-                placeholder="e.g., Special holiday schedule"
+                value={editingSchedule.special_note || ''}
+                onChange={(e) => setEditingSchedule({ ...editingSchedule, special_note: e.target.value })}
+                placeholder="e.g., No mass on holidays"
               />
             </div>
-
-            <Button onClick={() => handleSave(schedule)} disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save Schedule'}
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={() => handleSave(editingSchedule)} disabled={isLoading}>
+                {isLoading ? 'Saving...' : 'Save'}
+              </Button>
+              <Button variant="outline" onClick={() => setEditingSchedule(null)}>
+                Cancel
+              </Button>
+            </div>
           </CardContent>
         </Card>
-      ))}
+      )}
+
+      <div className="grid gap-4">
+        {schedules.map((schedule) => (
+          <Card key={schedule.id}>
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-semibold">{schedule.day_type}</h4>
+                  <p className="text-sm text-gray-600">Times: {schedule.times.join(', ')}</p>
+                  {schedule.special_note && (
+                    <p className="text-sm text-gray-500 mt-1">{schedule.special_note}</p>
+                  )}
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setEditingSchedule(schedule)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => handleDelete(schedule.id)}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };

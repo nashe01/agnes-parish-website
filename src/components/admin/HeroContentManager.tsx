@@ -6,12 +6,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import FileUpload from './FileUpload';
 
 interface HeroContent {
   id: string;
   parish_name: string;
-  archdiocese: string;
   welcome_text: string;
+  archdiocese: string;
   hero_image_url?: string;
 }
 
@@ -28,10 +29,23 @@ const HeroContentManager = () => {
     const { data, error } = await supabase
       .from('hero_content')
       .select('*')
-      .single();
+      .maybeSingle();
     
     if (data) {
       setContent(data);
+    } else if (!error) {
+      // Create default content if none exists
+      const defaultContent = {
+        parish_name: 'St Agnes Parish',
+        welcome_text: 'Experience faith, fellowship, and spiritual growth in our welcoming community.',
+        archdiocese: 'Archdiocese of Harare'
+      };
+      const { data: newData } = await supabase
+        .from('hero_content')
+        .insert(defaultContent)
+        .select()
+        .single();
+      if (newData) setContent(newData);
     }
   };
 
@@ -43,11 +57,7 @@ const HeroContentManager = () => {
     const { error } = await supabase
       .from('hero_content')
       .upsert({
-        id: content.id,
-        parish_name: content.parish_name,
-        archdiocese: content.archdiocese,
-        welcome_text: content.welcome_text,
-        hero_image_url: content.hero_image_url,
+        ...content,
         updated_at: new Date().toISOString(),
       });
 
@@ -64,6 +74,12 @@ const HeroContentManager = () => {
       });
     }
     setIsLoading(false);
+  };
+
+  const handleImageUpload = (url: string) => {
+    if (content) {
+      setContent({ ...content, hero_image_url: url });
+    }
   };
 
   if (!content) {
@@ -94,16 +110,14 @@ const HeroContentManager = () => {
           id="welcome_text"
           value={content.welcome_text}
           onChange={(e) => setContent({ ...content, welcome_text: e.target.value })}
-          rows={5}
+          rows={4}
         />
       </div>
       <div>
-        <Label htmlFor="hero_image_url">Hero Image URL</Label>
-        <Input
-          id="hero_image_url"
-          value={content.hero_image_url || ''}
-          onChange={(e) => setContent({ ...content, hero_image_url: e.target.value })}
-          placeholder="https://example.com/image.jpg"
+        <FileUpload
+          label="Hero Image"
+          onFileUpload={handleImageUpload}
+          currentFile={content.hero_image_url}
         />
       </div>
       <Button type="submit" disabled={isLoading}>

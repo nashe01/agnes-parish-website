@@ -68,7 +68,7 @@ const Admin = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Parish Admin Panel</h1>
-            <p className="text-gray-600 mt-2">Welcome, {user.email}! Manage your parish content here.</p>
+            <p className="text-gray-600 mt-2">Manage all website content</p>
           </div>
           <div className="flex gap-4">
             <Button onClick={() => navigate('/')} variant="outline">
@@ -82,11 +82,11 @@ const Admin = () => {
 
         <Tabs defaultValue="hero" className="space-y-6">
           <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="hero">Hero</TabsTrigger>
-            <TabsTrigger value="mass">Mass</TabsTrigger>
+            <TabsTrigger value="hero">Hero Section</TabsTrigger>
+            <TabsTrigger value="mass">Mass Schedule</TabsTrigger>
             <TabsTrigger value="announcements">Announcements</TabsTrigger>
             <TabsTrigger value="ministries">Ministries</TabsTrigger>
-            <TabsTrigger value="sacraments">Sacraments</TabsTrigger>
+            <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="news">News</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
           </TabsList>
@@ -135,10 +135,10 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="sacraments">
+          <TabsContent value="services">
             <Card>
               <CardHeader>
-                <CardTitle>Sacraments Management</CardTitle>
+                <CardTitle>Services Management</CardTitle>
               </CardHeader>
               <CardContent>
                 <SacramentsManager />

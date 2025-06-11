@@ -1,35 +1,55 @@
+
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Clock, Heart } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+interface MassSchedule {
+  id: string;
+  day_type: string;
+  times: string[];
+  special_note?: string;
+}
+
+interface Sacrament {
+  id: string;
+  name: string;
+  description: string;
+  requirement: string;
+}
 
 const ServicesSection = () => {
-  const masses = [
-    { day: "Sunday", times: ["7:00 AM", "9:00 AM", "11:00 AM", "6:00 PM"] },
-    { day: "Monday - Friday", times: ["6:30 AM", "12:00 PM"] },
-    { day: "Saturday", times: ["8:00 AM", "5:00 PM (Vigil)"] }
-  ];
+  const [massSchedules, setMassSchedules] = useState<MassSchedule[]>([]);
+  const [sacraments, setSacraments] = useState<Sacrament[]>([]);
 
-  const sacraments = [
-    {
-      name: "Baptism",
-      description: "First Sunday of each month at 1:00 PM",
-      requirement: "Baptism preparation class required"
-    },
-    {
-      name: "Confirmation",
-      description: "Annual ceremony in spring",
-      requirement: "Two-year preparation program required"
-    },
-    {
-      name: "Marriage",
-      description: "By appointment",
-      requirement: "Six-month preparation period required"
-    },
-    {
-      name: "Confession",
-      description: "Saturdays 4:00-5:00 PM or by appointment",
-      requirement: "Available before all masses"
+  useEffect(() => {
+    fetchMassSchedules();
+    fetchSacraments();
+  }, []);
+
+  const fetchMassSchedules = async () => {
+    const { data } = await supabase
+      .from('mass_schedules')
+      .select('*')
+      .eq('is_active', true)
+      .order('display_order');
+    
+    if (data) {
+      setMassSchedules(data);
     }
-  ];
+  };
+
+  const fetchSacraments = async () => {
+    const { data } = await supabase
+      .from('sacraments')
+      .select('*')
+      .eq('is_active', true)
+      .order('display_order');
+    
+    if (data) {
+      setSacraments(data);
+    }
+  };
 
   return (
     <section id="services" className="py-20 bg-gray-50">
@@ -47,23 +67,30 @@ const ServicesSection = () => {
                 <Clock className="w-8 h-8 text-secondary mr-3" />
                 <h3 className="text-2xl font-bold text-gray-900">Mass Schedule</h3>
               </div>
-              <div className="space-y-6">
-                {masses.map((mass, index) => (
-                  <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">{mass.day}</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {mass.times.map((time, timeIndex) => (
-                        <span 
-                          key={timeIndex}
-                          className="bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium"
-                        >
-                          {time}
-                        </span>
-                      ))}
+              {massSchedules.length > 0 ? (
+                <div className="space-y-6">
+                  {massSchedules.map((mass) => (
+                    <div key={mass.id} className="border-b border-gray-200 pb-4 last:border-b-0">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">{mass.day_type}</h4>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {mass.times.map((time, timeIndex) => (
+                          <span 
+                            key={timeIndex}
+                            className="bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium"
+                          >
+                            {time}
+                          </span>
+                        ))}
+                      </div>
+                      {mass.special_note && (
+                        <p className="text-gray-600 text-sm">{mass.special_note}</p>
+                      )}
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">No mass schedules available.</p>
+              )}
             </CardContent>
           </Card>
 
@@ -74,15 +101,19 @@ const ServicesSection = () => {
                 <Heart className="w-8 h-8 text-secondary mr-3" />
                 <h3 className="text-2xl font-bold text-gray-900">Sacraments</h3>
               </div>
-              <div className="space-y-6">
-                {sacraments.map((sacrament, index) => (
-                  <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">{sacrament.name}</h4>
-                    <p className="text-secondary font-medium mb-2">{sacrament.description}</p>
-                    <p className="text-gray-600 text-sm">{sacrament.requirement}</p>
-                  </div>
-                ))}
-              </div>
+              {sacraments.length > 0 ? (
+                <div className="space-y-6">
+                  {sacraments.map((sacrament) => (
+                    <div key={sacrament.id} className="border-b border-gray-200 pb-4 last:border-b-0">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-1">{sacrament.name}</h4>
+                      <p className="text-secondary font-medium mb-2">{sacrament.description}</p>
+                      <p className="text-gray-600 text-sm">{sacrament.requirement}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">No sacraments information available.</p>
+              )}
             </CardContent>
           </Card>
         </div>

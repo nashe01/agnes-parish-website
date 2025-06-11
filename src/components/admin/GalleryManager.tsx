@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Trash2, Edit } from 'lucide-react';
+import FileUpload from './FileUpload';
 
 interface GalleryPhoto {
   id: string;
@@ -42,12 +43,27 @@ const GalleryManager = () => {
     if (!editingPhoto) return;
 
     setIsLoading(true);
+    
+    // For new photos, don't include the id field
+    const photoData = editingPhoto.id 
+      ? {
+          id: editingPhoto.id,
+          url: editingPhoto.url,
+          caption: editingPhoto.caption,
+          display_order: editingPhoto.display_order,
+          is_active: editingPhoto.is_active,
+          updated_at: new Date().toISOString(),
+        }
+      : {
+          url: editingPhoto.url,
+          caption: editingPhoto.caption,
+          display_order: editingPhoto.display_order,
+          is_active: editingPhoto.is_active,
+        };
+
     const { error } = await supabase
       .from('gallery_photos')
-      .upsert({
-        ...editingPhoto,
-        updated_at: new Date().toISOString(),
-      });
+      .upsert(photoData);
 
     if (error) {
       toast({
@@ -89,12 +105,18 @@ const GalleryManager = () => {
 
   const createNew = () => {
     setEditingPhoto({
-      id: '',
+      id: '', // Empty string for new photos
       url: '',
       caption: '',
       display_order: photos.length,
       is_active: true,
     });
+  };
+
+  const handleImageUpload = (url: string) => {
+    if (editingPhoto) {
+      setEditingPhoto({ ...editingPhoto, url });
+    }
   };
 
   return (
@@ -115,16 +137,10 @@ const GalleryManager = () => {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="url">Image URL</Label>
-                <Input
-                  id="url"
-                  value={editingPhoto.url}
-                  onChange={(e) => setEditingPhoto({ 
-                    ...editingPhoto, 
-                    url: e.target.value 
-                  })}
-                  placeholder="https://example.com/photo.jpg"
-                  required
+                <FileUpload
+                  label="Photo"
+                  onFileUpload={handleImageUpload}
+                  currentFile={editingPhoto.url}
                 />
               </div>
               <div>
@@ -140,7 +156,7 @@ const GalleryManager = () => {
                 />
               </div>
               <div className="flex gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || !editingPhoto.url}>
                   {isLoading ? 'Saving...' : 'Save'}
                 </Button>
                 <Button 
