@@ -84,7 +84,7 @@ const Auth = () => {
                 className={`peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300 ${
                   isSubmitted ? 'opacity-0 -translate-y-2 scale-95' : ''
                 }`}
-                placeholder="Email"
+                placeholder="enter your email"
               />
               <label
                 htmlFor="email"
@@ -106,7 +106,7 @@ const Auth = () => {
                 className={`peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300 ${
                   isSubmitted ? 'opacity-0 -translate-y-2 scale-95' : ''
                 }`}
-                placeholder="Password"
+                placeholder="enter your password"
               />
               <label
                 htmlFor="password"
