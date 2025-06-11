@@ -1,5 +1,14 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, MessageSquareMore } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Facebook,
+  Instagram,
+  Twitter,
+  MessageSquareMore,
+} from 'lucide-react';
 
 const ContactSection = () => {
   return (
@@ -11,10 +20,11 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left Side Cards */}
-          <div className="space-y-6 flex flex-col justify-between">
-            <Card className="shadow-lg">
-              <CardContent className="p-8">
+          {/* Row 1: Left - Parish Office & Office Hours */}
+          <div className="flex flex-col space-y-6">
+            {/* Parish Office */}
+            <Card className="shadow-lg h-full">
+              <CardContent className="p-8 h-full">
                 <div className="flex items-center mb-6">
                   <MapPin className="w-8 h-8 text-secondary mr-3" />
                   <h3 className="text-2xl font-bold text-gray-900">Parish Office</h3>
@@ -45,8 +55,9 @@ const ContactSection = () => {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg">
-              <CardContent className="p-8">
+            {/* Office Hours */}
+            <Card className="shadow-lg h-full">
+              <CardContent className="p-8 h-full">
                 <div className="flex items-center mb-6">
                   <Clock className="w-8 h-8 text-secondary mr-3" />
                   <h3 className="text-2xl font-bold text-gray-900">Office Hours</h3>
@@ -71,9 +82,39 @@ const ContactSection = () => {
                 </div>
               </CardContent>
             </Card>
+          </div>
 
+          {/* Row 1: Right - Directions */}
+          <div className="flex flex-col h-full">
             <Card className="shadow-lg h-full">
-              <CardContent className="p-8 h-full">
+              <CardContent className="p-8 h-full flex flex-col">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Directions</h3>
+                <div className="rounded-lg overflow-hidden h-72 mb-6">
+                  <iframe
+                    title="Zengeza 3 Roman Catholic Church Location"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.553148050983!2d31.0578896!3d-18.0074889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x193199c10e8c6935%3A0x8e85a27ae711ba25!2sZengeza%203%20Roman%20Catholic%20Church%2C%20Chitungwiza!5e0!3m2!1sen!2szw!4v1717680000000"
+                  ></iframe>
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-3">Getting Here</h4>
+                <p className="text-gray-600 text-sm mb-2">
+                  Our parish is conveniently located in the heart of Chitungwiza City, easily accessible by public transport and car.
+                </p>
+                <p className="text-gray-600 text-sm">
+                  For detailed directions, please use the map above or contact us directly.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Row 2: Left - Parish Staff */}
+          <div className="flex flex-col h-full">
+            <Card className="shadow-lg h-full">
+              <CardContent className="p-8 h-full flex flex-col">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Parish Staff</h3>
                 <div className="space-y-4">
                   <div>
@@ -101,36 +142,10 @@ const ContactSection = () => {
             </Card>
           </div>
 
-          {/* Right Side Cards */}
-          <div className="space-y-6 flex flex-col justify-between">
-            {/* Directions Card */}
-            <Card className="shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Directions</h3>
-                <div className="rounded-lg overflow-hidden h-96 mb-6">
-                  <iframe
-                    title="Zengeza 3 Roman Catholic Church Location"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    loading="lazy"
-                    allowFullScreen
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.553148050983!2d31.0578896!3d-18.0074889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x193199c10e8c6935%3A0x8e85a27ae711ba25!2sZengeza%203%20Roman%20Catholic%20Church%2C%20Chitungwiza!5e0!3m2!1sen!2szw!4v1717680000000"
-                  ></iframe>
-                </div>
-                <h4 className="font-semibold text-gray-900 mb-3">Getting Here</h4>
-                <p className="text-gray-600 text-sm mb-2">
-                  Our parish is conveniently located in the heart of Chitungwiza City, easily accessible by public transport and car.
-                </p>
-                <p className="text-gray-600 text-sm">
-                  For detailed directions, please use the map above or contact us directly.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Send Us a Message Card */}
-            <Card className="shadow-lg flex-1">
-              <CardContent className="p-8 flex flex-col justify-between h-full">
+          {/* Row 2: Right - Send Us a Message */}
+          <div className="flex flex-col h-full">
+            <Card className="shadow-lg h-full">
+              <CardContent className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Send Us a Message</h3>
                   <form className="space-y-4">
@@ -169,7 +184,7 @@ const ContactSection = () => {
 
                 <div className="mt-6">
                   <h4 className="font-semibold text-gray-900 mb-2">Connect With Us</h4>
-                  <div className="flex gap-6 text-sky-500 mt-3 text-2xl">
+                  <div className="flex gap-6 text-sky-500 mt-3 text-3xl">
                     <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" title="WhatsApp">
                       <MessageSquareMore className="hover:text-green-500" />
                     </a>
@@ -194,5 +209,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
-
