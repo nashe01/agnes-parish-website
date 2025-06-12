@@ -57,7 +57,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center text-secondary hover:text-secondary/80 transition-colors"
+            className="flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Home
@@ -104,7 +104,7 @@ const About = () => {
                 <CardContent className="p-0 h-full">
                   <div className="relative h-full">
                     {hoveredCard === 'saint' ? (
-                      <div className="h-full bg-white p-6 flex flex-col justify-between">
+                      <div className="h-full bg-white p-6 flex flex-col justify-between opacity-0 animate-fade-in">
                         <div className="overflow-y-auto">
                           <h3 className="text-2xl font-bold mb-4">Saint Agnes History</h3>
                           <p className="text-gray-600 text-sm leading-relaxed">
@@ -121,7 +121,7 @@ const About = () => {
                             rape victims, and virgins.
                           </p>
                         </div>
-                        <button className="mt-4 flex items-center justify-center bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary/90 transition-colors">
+                        <button className="mt-4 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
                           <Download className="w-4 h-4 mr-2" />
                           Download Full History PDF
                         </button>
@@ -129,7 +129,7 @@ const About = () => {
                     ) : (
                       <div className="h-full relative">
                         <img 
-                          src="https://images.unsplash.com/photo-1587384474964-3a06ce1ce699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                          src="/lovable-uploads/333a1e52-ace4-40f6-8d59-dade5e28336c.png"
                           alt="Saint Agnes"
                           className="w-full h-full object-cover"
                         />
@@ -151,7 +151,7 @@ const About = () => {
                 <CardContent className="p-0 h-full">
                   <div className="relative h-full">
                     {hoveredCard === 'church' ? (
-                      <div className="h-full bg-white p-6 flex flex-col justify-between">
+                      <div className="h-full bg-white p-6 flex flex-col justify-between opacity-0 animate-fade-in">
                         <div className="overflow-y-auto">
                           <h3 className="text-2xl font-bold mb-4">Church History</h3>
                           <p className="text-gray-600 text-sm leading-relaxed">
@@ -169,7 +169,7 @@ const About = () => {
                             community it is today.
                           </p>
                         </div>
-                        <button className="mt-4 flex items-center justify-center bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary/90 transition-colors">
+                        <button className="mt-4 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
                           <Download className="w-4 h-4 mr-2" />
                           Download Full History PDF
                         </button>
@@ -177,7 +177,7 @@ const About = () => {
                     ) : (
                       <div className="h-full relative">
                         <img 
-                          src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                          src="/lovable-uploads/2c81f3cf-697b-4703-8a8c-047c57de5827.png"
                           alt="Church Building"
                           className="w-full h-full object-cover"
                         />
@@ -247,7 +247,7 @@ const About = () => {
             <div className="text-center">
               <button
                 onClick={() => setSectionsExpanded(!sectionsExpanded)}
-                className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 {sectionsExpanded ? 'Show Less' : 'All Sections'}
               </button>
@@ -309,7 +309,7 @@ const About = () => {
             <div className="text-center">
               <button
                 onClick={() => setGuildsExpanded(!guildsExpanded)}
-                className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 {guildsExpanded ? 'Show Less' : 'All Guilds'}
               </button>
