@@ -126,11 +126,13 @@ const ContactSection = () => {
                   ></iframe>
                 </div>
 
-                {/* Restored Text Below Map */}
-                <p className="text-gray-700 mb-4">
-  Looking for the easiest way to visit us? Just tap the button below and you'll get personalized, turn-by-turn directions from your current location straight to our parish. Whether you're coming by car, public transport, or walking, we want to make sure your journey here is simple and stress-free.
-</p>
-
+                {/* Bulleted Notes Below Map */}
+                <ul className="text-gray-700 mb-4 list-disc list-inside space-y-1">
+                  <li>Tap the button below to get personalized, turn-by-turn directions.</li>
+                  <li>We'll use your current location to guide you straight to our parish.</li>
+                  <li>Directions work for driving, public transport, or walking.</li>
+                  <li>We aim to make your journey here simple and stress-free.</li>
+                </ul>
 
                 {/* Get Directions Button */}
                 <button
@@ -237,4 +239,5 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
 
