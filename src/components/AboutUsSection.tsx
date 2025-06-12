@@ -3,20 +3,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const AboutUsSection = () => {
   const [currentCard, setCurrentCard] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentCard(prev => (prev + 1) % 2);
-        setIsTransitioning(false);
-      }, 1000); // 1 second fade out, then switch content
+      setCurrentCard(prev => (prev + 1) % 2);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -39,7 +33,7 @@ const AboutUsSection = () => {
     <section id="about" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">About Us</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">About Us</h2>
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
         </div>
 
@@ -51,20 +45,14 @@ const AboutUsSection = () => {
                 <img 
                   src={cardContent[currentCard].image}
                   alt={cardContent[currentCard].title}
-                  className={`w-full h-full object-cover transition-opacity duration-1000 ${
-                    isTransitioning ? 'opacity-0' : 'opacity-100'
-                  }`}
+                  className="w-full h-full object-cover transition-opacity duration-1000"
                 />
               </div>
               <div className="p-8 flex flex-col justify-center bg-white">
-                <h3 className={`text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 transition-opacity duration-1000 ${
-                  isTransitioning ? 'opacity-0' : 'opacity-100'
-                }`}>
+                <h3 className="text-3xl font-bold text-gray-900 mb-6 transition-opacity duration-1000">
                   {cardContent[currentCard].title}
                 </h3>
-                <p className={`text-gray-600 text-lg leading-relaxed transition-opacity duration-1000 ${
-                  isTransitioning ? 'opacity-0' : 'opacity-100'
-                }`}>
+                <p className="text-gray-600 text-lg leading-relaxed transition-opacity duration-1000">
                   {cardContent[currentCard].content}
                 </p>
               </div>
@@ -74,7 +62,7 @@ const AboutUsSection = () => {
 
         {/* Learn More Points */}
         <div className="text-center mb-12">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">Learn More About</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">Learn More About</h3>
           <div className="grid md:grid-cols-5 gap-4 mb-8">
             {[
               'Our Church',
@@ -91,13 +79,13 @@ const AboutUsSection = () => {
 
           {/* Learn More Button */}
           <div className="flex justify-center">
-            <Button
+            <button
               onClick={() => navigate('/about')}
-              className="group flex items-center"
+              className="group flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Learn More
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
+            </button>
           </div>
         </div>
       </div>
