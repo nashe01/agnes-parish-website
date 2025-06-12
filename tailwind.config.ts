@@ -119,7 +119,7 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "scroll-left": "scroll-left 30s linear infinite",
         "scroll-right": "scroll-right 30s linear infinite",
-        "scroll-up": "scroll-up 30s linear infinite",
+        "scroll-up": "scroll-up 20s linear infinite",
         "flip": "flip 0.6s ease-in-out",
         "slide-in-left": "slide-in-left 0.5s ease-out forwards",
         "fade-out-up": "fade-out-up 0.5s ease-in forwards",

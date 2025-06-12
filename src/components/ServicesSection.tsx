@@ -64,7 +64,7 @@ const ServicesSection = () => {
           }
 
           .animate-scroll-up {
-            animation: scroll-up 60s linear infinite;
+            animation: scroll-up 20s linear infinite;
           }
         `}
       </style>
@@ -170,4 +170,3 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
-
