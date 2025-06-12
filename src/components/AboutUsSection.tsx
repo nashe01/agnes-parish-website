@@ -25,7 +25,7 @@ const AboutUsSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentCard(prev => (prev + 1) % 2);
-    }, 15000); // 15 seconds interval for slow fade
+    }, 15000); // 15 seconds interval
 
     return () => clearInterval(interval);
   }, []);
@@ -46,13 +46,18 @@ const AboutUsSection = () => {
     <section id="about" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About Us</h2>
+          <h2
+            className="text-4xl font-bold mb-4"
+            style={{ color: 'rgb(14, 165, 233)' }}
+          >
+            About Us
+          </h2>
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
         </div>
 
         {/* Crossfade container */}
         <div className="relative max-w-5xl mx-auto h-[400px] mb-12">
-          {[0, 1].map((index) => (
+          {[0, 1].map(index => (
             <AnimatePresence key={index}>
               {currentCard === index && (
                 <motion.div
@@ -64,7 +69,11 @@ const AboutUsSection = () => {
                   transition={{ duration: 2 }}
                 >
                   {/* Image */}
-                  <motion.div className="h-[400px]" variants={imageVariants} transition={{ duration: 2 }}>
+                  <motion.div
+                    className="h-[400px]"
+                    variants={imageVariants}
+                    transition={{ duration: 2 }}
+                  >
                     <img
                       src={cardContent[index].image}
                       alt={cardContent[index].title}
@@ -78,7 +87,10 @@ const AboutUsSection = () => {
                     variants={textVariants}
                     transition={{ duration: 2, delay: 0.5 }}
                   >
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                    <h3
+                      className="text-3xl font-bold mb-4"
+                      style={{ color: 'rgb(14, 165, 233)' }}
+                    >
                       {cardContent[index].title}
                     </h3>
                     <p className="text-gray-600 text-lg leading-relaxed">
@@ -93,7 +105,12 @@ const AboutUsSection = () => {
 
         {/* Learn More Section */}
         <div className="text-center mb-12">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">Learn More About</h3>
+          <h3
+            className="text-2xl font-bold mb-8"
+            style={{ color: 'rgb(14, 165, 233)' }}
+          >
+            Learn More About
+          </h3>
           <div className="grid md:grid-cols-5 gap-4 mb-8">
             {[
               'Our Church',
@@ -111,10 +128,10 @@ const AboutUsSection = () => {
           <div className="flex justify-center">
             <button
               onClick={() => navigate('/about')}
-              className="group flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="group flex items-center bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 px-6 py-2 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Learn More
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
         </div>
