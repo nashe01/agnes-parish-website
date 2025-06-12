@@ -3,10 +3,10 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
@@ -42,10 +42,6 @@ export default {
           700: "#0369a1",
           800: "#075985",
           900: "#0c4a6e",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -100,6 +96,10 @@ export default {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(0)" },
         },
+        "scroll-up": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
         "flip": {
           "0%": { transform: "rotateY(0)" },
           "100%": { transform: "rotateY(180deg)" },
@@ -119,14 +119,13 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "scroll-left": "scroll-left 30s linear infinite",
         "scroll-right": "scroll-right 30s linear infinite",
+        "scroll-up": "scroll-up 30s linear infinite",
         "flip": "flip 0.6s ease-in-out",
         "slide-in-left": "slide-in-left 0.5s ease-out forwards",
         "fade-out-up": "fade-out-up 0.5s ease-in forwards",
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate")
-
-  ],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
