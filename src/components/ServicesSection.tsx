@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Clock, Heart } from 'lucide-react';
@@ -33,7 +32,7 @@ const ServicesSection = () => {
       .select('*')
       .eq('is_active', true)
       .order('display_order');
-    
+
     if (data) {
       setMassSchedules(data);
     }
@@ -45,7 +44,7 @@ const ServicesSection = () => {
       .select('*')
       .eq('is_active', true)
       .order('display_order');
-    
+
     if (data) {
       setSacraments(data);
     }
@@ -61,59 +60,63 @@ const ServicesSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Mass Schedule */}
-          <Card className="shadow-lg">
-            <CardContent className="p-8">
-              <div className="flex items-center mb-6">
-                <Clock className="w-8 h-8 text-secondary mr-3" />
-                <h3 className="text-2xl font-bold text-gray-900">Mass Schedule</h3>
+          <Card className="shadow-lg max-h-[500px] flex flex-col bg-gray-50">
+            <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
+              <div className="sticky top-0 z-10 bg-gray-50 p-6 flex items-center">
+                <Clock className="w-6 h-6 text-secondary mr-2" />
+                <h3 className="text-xl font-bold text-gray-900">Mass Schedule</h3>
               </div>
-              {massSchedules.length > 0 ? (
-                <div className="space-y-6">
-                  {massSchedules.map((mass) => (
-                    <div key={mass.id} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">{mass.day_type}</h4>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {mass.times.map((time, timeIndex) => (
-                          <span 
-                            key={timeIndex}
-                            className="bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium"
-                          >
-                            {time}
-                          </span>
-                        ))}
+              <div className="p-6 flex-1">
+                {massSchedules.length > 0 ? (
+                  <div className="space-y-4">
+                    {massSchedules.map((mass) => (
+                      <div key={mass.id} className="border-b border-gray-200 pb-3 last:border-b-0">
+                        <h4 className="text-base font-semibold text-gray-900 mb-1">{mass.day_type}</h4>
+                        <div className="flex flex-wrap gap-2 mb-1">
+                          {mass.times.map((time, index) => (
+                            <span
+                              key={index}
+                              className="bg-secondary text-white px-2 py-0.5 rounded-full text-xs font-medium"
+                            >
+                              {time}
+                            </span>
+                          ))}
+                        </div>
+                        {mass.special_note && (
+                          <p className="text-gray-600 text-xs">{mass.special_note}</p>
+                        )}
                       </div>
-                      {mass.special_note && (
-                        <p className="text-gray-600 text-sm">{mass.special_note}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-600">No mass schedules available.</p>
-              )}
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-600 text-sm">No mass schedules available.</p>
+                )}
+              </div>
             </CardContent>
           </Card>
 
           {/* Sacraments */}
-          <Card className="shadow-lg">
-            <CardContent className="p-8">
-              <div className="flex items-center mb-6">
-                <Heart className="w-8 h-8 text-secondary mr-3" />
-                <h3 className="text-2xl font-bold text-gray-900">Sacraments</h3>
+          <Card className="shadow-lg max-h-[500px] flex flex-col bg-gray-50">
+            <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
+              <div className="sticky top-0 z-10 bg-gray-50 p-6 flex items-center">
+                <Heart className="w-6 h-6 text-secondary mr-2" />
+                <h3 className="text-xl font-bold text-gray-900">Sacraments</h3>
               </div>
-              {sacraments.length > 0 ? (
-                <div className="space-y-6">
-                  {sacraments.map((sacrament) => (
-                    <div key={sacrament.id} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-1">{sacrament.name}</h4>
-                      <p className="text-secondary font-medium mb-2">{sacrament.description}</p>
-                      <p className="text-gray-600 text-sm">{sacrament.requirement}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-600">No sacraments information available.</p>
-              )}
+              <div className="p-6 overflow-y-auto flex-1">
+                {sacraments.length > 0 ? (
+                  <div className="space-y-4">
+                    {sacraments.map((sacrament) => (
+                      <div key={sacrament.id} className="border-b border-gray-200 pb-3 last:border-b-0">
+                        <h4 className="text-base font-semibold text-gray-900 mb-1">{sacrament.name}</h4>
+                        <p className="text-secondary text-sm mb-1">{sacrament.description}</p>
+                        <p className="text-gray-600 text-xs">{sacrament.requirement}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-600 text-sm">No sacraments information available.</p>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
