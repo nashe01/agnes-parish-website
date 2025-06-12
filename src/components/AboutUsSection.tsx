@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const AboutUsSection = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -12,23 +12,35 @@ const AboutUsSection = () => {
       image: '/lovable-uploads/2c81f3cf-697b-4703-8a8c-047c57de5827.png',
       title: 'St. Agnes Catholic Parish',
       content:
-        'Founded in 1952, St. Agnes Catholic Parish has served its community for over 70 years. From humble beginnings, it has grown into a vibrant and welcoming faith family.',
+        'Founded in 1952, St. Agnes Catholic Parish has faithfully served its community for over 70 years. Beginning as a small congregation, it has grown into a vibrant and welcoming faith family that embraces people from all walks of life. Our parish continues to uphold the teachings of the Church while actively engaging in community outreach, spiritual growth, and fostering fellowship among parishioners.'
     },
     {
       image: '/lovable-uploads/333a1e52-ace4-40f6-8d59-dade5e28336c.png',
       title: 'Saint Agnes of Rome',
       content:
-        'Saint Agnes was a young Roman noblewoman martyred for her faith around 304 AD. She is a symbol of purity, courage, and devotion to Christ.',
-    },
+        'Saint Agnes was a young Roman noblewoman who lived in the early 4th century and was martyred around 304 AD for her unwavering faith in Christ. Remembered for her purity, courage, and devotion, Agnes is a symbol of steadfast belief and virtue. Her legacy inspires countless faithful worldwide to live lives of integrity and dedication to their spiritual calling.'
+    }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentCard((prev) => (prev + 1) % cardContent.length);
-    }, 15000); // 15 seconds
+      setCurrentCard(prev => (prev + 1) % 2);
+    }, 15000); // 15 seconds interval for slow fade
 
     return () => clearInterval(interval);
   }, []);
+
+  const imageVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
+
+  const textVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 }
+  };
 
   return (
     <section id="about" className="py-20 bg-gray-50">
@@ -38,65 +50,62 @@ const AboutUsSection = () => {
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
         </div>
 
-        {/* Animated card container */}
-        <div className="relative max-w-5xl mx-auto h-[400px] overflow-hidden mb-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentCard}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
-              className="absolute inset-0 grid md:grid-cols-2"
-            >
-              {/* Image Section */}
-              <motion.div
-                className="h-[400px]"
-                key={`img-${currentCard}`}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 1.5 }}
-              >
-                <img
-                  src={cardContent[currentCard].image}
-                  alt={cardContent[currentCard].title}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-
-              {/* Text Section */}
-              <div className="p-8 flex flex-col justify-center bg-white h-[400px] overflow-hidden">
+        {/* Crossfade container */}
+        <div className="relative max-w-5xl mx-auto h-[400px] mb-12">
+          {[0, 1].map((index) => (
+            <AnimatePresence key={index}>
+              {currentCard === index && (
                 <motion.div
-                  key={`text-${currentCard}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 1.2, delay: 0.2 }}
+                  key={index}
+                  className="absolute inset-0 grid md:grid-cols-2"
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ duration: 2 }}
                 >
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                    {cardContent[currentCard].title}
-                  </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed line-clamp-4">
-                    {cardContent[currentCard].content}
-                  </p>
+                  {/* Image */}
+                  <motion.div className="h-[400px]" variants={imageVariants} transition={{ duration: 2 }}>
+                    <img
+                      src={cardContent[index].image}
+                      alt={cardContent[index].title}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Text section aligned at top */}
+                  <motion.div
+                    className="p-8 flex flex-col justify-start bg-white h-[400px]"
+                    variants={textVariants}
+                    transition={{ duration: 2, delay: 0.5 }}
+                  >
+                    <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                      {cardContent[index].title}
+                    </h3>
+                    <p className="text-gray-600 text-lg leading-relaxed">
+                      {cardContent[index].content}
+                    </p>
+                  </motion.div>
                 </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              )}
+            </AnimatePresence>
+          ))}
         </div>
 
         {/* Learn More Section */}
         <div className="text-center mb-12">
           <h3 className="text-2xl font-bold text-gray-900 mb-8">Learn More About</h3>
           <div className="grid md:grid-cols-5 gap-4 mb-8">
-            {['Our Church', 'Leadership', 'Church History', 'Saint History', 'Sections & Guilds'].map(
-              (item, index) => (
-                <div key={index} className="p-4 text-center">
-                  <p className="font-medium text-gray-900 text-lg">{item}</p>
-                </div>
-              )
-            )}
+            {[
+              'Our Church',
+              'Leadership',
+              'Church History',
+              'Saint History',
+              'Sections & Guilds'
+            ].map((item, index) => (
+              <div key={index} className="p-4 text-center">
+                <p className="font-medium text-gray-900 text-lg">{item}</p>
+              </div>
+            ))}
           </div>
 
           <div className="flex justify-center">
