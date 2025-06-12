@@ -11,91 +11,88 @@ const AboutUsSection = () => {
     {
       image: '/lovable-uploads/2c81f3cf-697b-4703-8a8c-047c57de5827.png',
       title: 'St. Agnes Catholic Parish',
-      content:
-        'Founded in 1952, St. Agnes Catholic Parish has served its community for over 70 years. From humble beginnings, it has grown into a vibrant and welcoming faith family. Our parish is a beacon of hope, faith, and service, bringing together people of all ages and backgrounds to grow spiritually and serve the community.'
+      content: `Founded in 1952, St. Agnes Catholic Parish has served its community for over 70 years. From humble beginnings, it has grown into a vibrant and welcoming faith family.
+
+      Over the decades, the parish has witnessed generations of faithful come together for worship, service, and fellowship. What started as a small mission has become a cornerstone of spiritual life in the region.
+
+      Through numerous outreach programs, events, and sacraments, St. Agnes continues to nurture both the spiritual and social well-being of its congregation and broader community.`
     },
     {
       image: '/lovable-uploads/333a1e52-ace4-40f6-8d59-dade5e28336c.png',
       title: 'Saint Agnes of Rome',
-      content:
-        'Saint Agnes was a young Roman noblewoman martyred for her faith around 304 AD. She is a symbol of purity, courage, and devotion to Christ. Her story inspires countless believers to stand firm in their faith and to live lives of holiness and charity.'
+      content: `Saint Agnes was a young Roman noblewoman martyred for her faith around 304 AD. She is a symbol of purity, courage, and devotion to Christ.
+
+      At just 12 or 13 years old, Agnes stood firm in her beliefs during a time of intense Christian persecution in Rome. Despite pressure and threats, she refused to renounce her faith or marry a Roman official.
+
+      Her bravery and unwavering commitment to Christ have made her one of the most venerated virgin martyrs in Catholic tradition. Her feast day is celebrated on January 21st.`
     }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentCard(prev => (prev + 1) % cardContent.length);
-    }, 15000); // 15 seconds
+      setCurrentCard((prev) => (prev + 1) % cardContent.length);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const containerVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 2 } },
-    exit: { opacity: 0, transition: { duration: 2 } }
-  };
-
-  const textVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 2 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 2 } }
-  };
-
   return (
     <section id="about" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* About Us Heading */}
+        {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: 'rgb(14, 165, 233)' }}>
+          <h2 className="text-4xl font-bold" style={{ color: 'rgb(14,165,233)' }}>
             About Us
           </h2>
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
         </div>
 
-        {/* Cards container */}
-        <div className="relative max-w-5xl mx-auto h-[400px] mb-12">
+        {/* Crossfade Cards */}
+        <div className="relative max-w-5xl mx-auto h-[460px] overflow-hidden mb-4">
           <AnimatePresence mode="wait">
-            {cardContent.map((card, index) =>
-              index === currentCard ? (
-                <motion.div
-                  key={card.title}
-                  className="absolute inset-0 grid md:grid-cols-2"
-                  variants={containerVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  {/* Image */}
-                  <div className="h-[400px]">
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            <motion.div
+              key={currentCard}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+              className="absolute inset-0 grid md:grid-cols-2"
+            >
+              {/* Image Section */}
+              <div className="h-[460px]">
+                <img
+                  src={cardContent[currentCard].image}
+                  alt={cardContent[currentCard].title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-                  {/* Text - pushed up */}
-                  <motion.div
-                    className="p-8 flex flex-col justify-start bg-white h-[400px]"
-                    variants={textVariants}
-                    key={`text-${card.title}`}
-                  >
-                    <h3 className="text-3xl font-bold mb-4" style={{ color: 'rgb(14, 165, 233)' }}>
-                      {card.title}
-                    </h3>
-                    <p className="text-gray-600 text-lg leading-relaxed line-clamp-6">
-                      {card.content}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              ) : null
-            )}
+              {/* Text Section */}
+              <div className="p-8 flex flex-col justify-start bg-gray-50 h-[460px]">
+                <motion.h3
+                  className="text-3xl font-bold mb-4"
+                  style={{ color: 'rgb(14,165,233)' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.2 }}
+                >
+                  {cardContent[currentCard].title}
+                </motion.h3>
+                <motion.p
+                  className="text-gray-700 text-lg leading-relaxed whitespace-pre-line"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5, delay: 0.3 }}
+                >
+                  {cardContent[currentCard].content}
+                </motion.p>
+              </div>
+            </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Learn More Button */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-32">
           <button
             onClick={() => navigate('/about')}
             className="group flex items-center bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 px-6 py-2 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-lg"
