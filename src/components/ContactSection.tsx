@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Phone,
@@ -11,6 +14,33 @@ import {
 } from 'lucide-react';
 
 const ContactSection = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleGetDirections = () => {
+    setLoading(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLng = position.coords.longitude;
+          const destination = 'Zengeza 3 Roman Catholic Church, Chitungwiza';
+          const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${encodeURIComponent(
+            destination
+          )}&travelmode=driving`;
+          window.open(mapsUrl, '_blank');
+          setLoading(false);
+        },
+        (error) => {
+          alert('Unable to retrieve your location. Please ensure location services are enabled.');
+          setLoading(false);
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by your browser.');
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,7 +50,7 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Row 1: Left - Parish Office & Office Hours */}
+          {/* Parish Office & Office Hours */}
           <div className="flex flex-col space-y-6">
             {/* Parish Office */}
             <Card className="shadow-lg h-full">
@@ -63,28 +93,23 @@ const ContactSection = () => {
                   <h3 className="text-2xl font-bold text-gray-900">Office Hours</h3>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="font-medium text-gray-900">Monday - Thursday</span>
-                    <span className="text-black">9:00 AM - 5:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium text-gray-900">Friday</span>
-                    <span className="text-black">9:00 AM - 12:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium text-gray-900">Saturday</span>
-                    <span className="text-black">By Appointment</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium text-gray-900">Sunday</span>
-                    <span className="text-black">Closed</span>
-                  </div>
+                  {[
+                    ['Monday - Thursday', '9:00 AM - 5:00 PM'],
+                    ['Friday', '9:00 AM - 12:00 PM'],
+                    ['Saturday', 'By Appointment'],
+                    ['Sunday', 'Closed'],
+                  ].map(([day, time]) => (
+                    <div className="flex justify-between" key={day}>
+                      <span className="font-medium text-gray-900">{day}</span>
+                      <span className="text-black">{time}</span>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Row 1: Right - Directions */}
+          {/* Directions */}
           <div className="flex flex-col h-full">
             <Card className="shadow-lg h-full">
               <CardContent className="p-8 h-full flex flex-col">
@@ -100,71 +125,73 @@ const ContactSection = () => {
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.553148050983!2d31.0578896!3d-18.0074889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x193199c10e8c6935%3A0x8e85a27ae711ba25!2sZengeza%203%20Roman%20Catholic%20Church%2C%20Chitungwiza!5e0!3m2!1sen!2szw!4v1717680000000"
                   ></iframe>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-3">Getting Here</h4>
-                <p className="text-gray-600 text-sm mb-2">
-                  Our parish is conveniently located in the heart of Chitungwiza City, easily accessible by public transport and car.
-                </p>
-                <p className="text-gray-600 text-sm">
-                  For detailed directions, please use the map above or contact us directly.
-                </p>
+
+                {/* Restored Text Below Map */}
+                <p className="text-gray-700 mb-4">
+  Looking for the easiest way to visit us? Just tap the button below and you'll get personalized, turn-by-turn directions from your current location straight to our parish. Whether you're coming by car, public transport, or walking, we want to make sure your journey here is simple and stress-free.
+</p>
+
+
+                {/* Get Directions Button */}
+                <button
+                  onClick={handleGetDirections}
+                  disabled={loading}
+                  className={`text-white font-semibold px-6 py-2 rounded-lg transition flex items-center justify-center w-fit ${
+                    loading
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-sky-500 hover:bg-gradient-to-r from-sky-500 to-sky-800'
+                  }`}
+                >
+                  <MapPin className="inline mr-2 -mt-1" />
+                  {loading ? 'Getting location...' : 'Get Directions'}
+                </button>
               </CardContent>
             </Card>
           </div>
 
-          {/* Row 2: Left - Parish Staff */}
+          {/* Parish Staff */}
           <div className="flex flex-col h-full">
             <Card className="shadow-lg h-full">
               <CardContent className="p-8 h-full flex flex-col">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Parish Staff</h3>
                 <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Fr. Michael Rodriguez</h4>
-                    <p className="text-secondary">Pastor</p>
-                    <p className="text-gray-600 text-sm">pastor@stagnesparish.org</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Deacon John Smith</h4>
-                    <p className="text-secondary">Permanent Deacon</p>
-                    <p className="text-gray-600 text-sm">deacon@stagnesparish.org</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Mary Johnson</h4>
-                    <p className="text-secondary">Parish Administrator</p>
-                    <p className="text-gray-600 text-sm">admin@stagnesparish.org</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">David Wilson</h4>
-                    <p className="text-secondary">Music Director</p>
-                    <p className="text-gray-600 text-sm">music@stagnesparish.org</p>
-                  </div>
+                  {[
+                    ['Fr. Michael Rodriguez', 'Pastor', 'pastor@stagnesparish.org'],
+                    ['Deacon John Smith', 'Permanent Deacon', 'deacon@stagnesparish.org'],
+                    ['Mary Johnson', 'Parish Administrator', 'admin@stagnesparish.org'],
+                    ['David Wilson', 'Music Director', 'music@stagnesparish.org'],
+                  ].map(([name, title, email]) => (
+                    <div key={name}>
+                      <h4 className="font-semibold text-gray-900">{name}</h4>
+                      <p className="text-secondary">{title}</p>
+                      <p className="text-gray-600 text-sm">{email}</p>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Row 2: Right - Send Us a Message */}
+          {/* Message Form */}
           <div className="flex flex-col h-full">
             <Card className="shadow-lg h-full">
               <CardContent className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Send Us a Message</h3>
                   <form className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                      <input
-                        type="text"
-                        placeholder="Your Name"
-                        className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                      <input
-                        type="email"
-                        placeholder="you@example.com"
-                        className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-                    </div>
+                    {[
+                      ['Name', 'text', 'Your Name'],
+                      ['Email', 'email', 'you@example.com'],
+                    ].map(([label, type, placeholder]) => (
+                      <div key={label}>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+                        <input
+                          type={type}
+                          placeholder={placeholder}
+                          className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        />
+                      </div>
+                    ))}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                       <textarea
@@ -182,6 +209,7 @@ const ContactSection = () => {
                   </form>
                 </div>
 
+                {/* Social Media */}
                 <div className="mt-6">
                   <h4 className="font-semibold text-gray-900 mb-2">Connect With Us</h4>
                   <div className="flex gap-6 text-sky-500 mt-3 text-3xl">
@@ -209,3 +237,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
