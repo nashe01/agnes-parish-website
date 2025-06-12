@@ -106,10 +106,8 @@ const Auth = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={isSubmitted}
-                className={`peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300 ${
-                  isSubmitted ? 'opacity-0 -translate-y-2 scale-95' : ''
-                }`}
+                disabled={isLoading}
+                className="peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300"
                 placeholder="Email"
               />
               <label
@@ -127,10 +125,8 @@ const Auth = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                disabled={isSubmitted}
-                className={`peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300 ${
-                  isSubmitted ? 'opacity-0 -translate-y-2 scale-95' : ''
-                }`}
+                disabled={isLoading}
+                className="peer w-full border border-gray-300 rounded-md px-3 pt-5 pb-2 bg-white text-sm placeholder-transparent focus:outline-none focus:border-blue-500 transition-all duration-300"
                 placeholder="Password"
               />
               <label
