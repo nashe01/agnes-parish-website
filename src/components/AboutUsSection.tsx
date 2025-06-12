@@ -1,7 +1,5 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 
 const AboutUsSection = () => {
@@ -37,28 +35,24 @@ const AboutUsSection = () => {
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
         </div>
 
-        {/* Card with fade transition */}
-        <Card className="mb-12 overflow-hidden shadow-lg max-w-4xl mx-auto">
-          <CardContent className="p-0">
-            <div className="grid md:grid-cols-2 min-h-[400px]">
-              <div className="relative overflow-hidden">
-                <img 
-                  src={cardContent[currentCard].image}
-                  alt={cardContent[currentCard].title}
-                  className="w-full h-full object-cover transition-opacity duration-1000"
-                />
-              </div>
-              <div className="p-8 flex flex-col justify-center bg-white">
-                <h3 className="text-3xl font-bold text-gray-900 mb-6 transition-opacity duration-1000">
-                  {cardContent[currentCard].title}
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed transition-opacity duration-1000">
-                  {cardContent[currentCard].content}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Natural-looking section (no card style) */}
+        <div className="grid md:grid-cols-2 max-w-5xl mx-auto min-h-[400px] mb-12 bg-white">
+          <div className="relative overflow-hidden">
+            <img
+              src={cardContent[currentCard].image}
+              alt={cardContent[currentCard].title}
+              className="w-full h-full object-cover transition-opacity duration-1000"
+            />
+          </div>
+          <div className="p-8 flex flex-col justify-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-6 transition-opacity duration-1000">
+              {cardContent[currentCard].title}
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed transition-opacity duration-1000">
+              {cardContent[currentCard].content}
+            </p>
+          </div>
+        </div>
 
         {/* Learn More Points */}
         <div className="text-center mb-12">
@@ -94,3 +88,4 @@ const AboutUsSection = () => {
 };
 
 export default AboutUsSection;
+
