@@ -142,7 +142,7 @@ const ServicesSection = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-center mb-4">
                 <Calendar className="w-6 h-6 text-secondary mr-2" />
-                <h3 className="text-xl font-bold text-gray-900">Special Events & Feast Days</h3>
+                <h3 className="text-xl font-bold text-sky-500">Special Events & Feast Days</h3>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
