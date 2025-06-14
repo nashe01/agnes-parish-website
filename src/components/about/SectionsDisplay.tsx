@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -113,7 +112,6 @@ const SectionsDisplay = () => {
           <button
             onClick={() => {
               setSectionsExpanded(!sectionsExpanded);
-              if (!sectionsExpanded) window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             className="bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
@@ -126,4 +124,3 @@ const SectionsDisplay = () => {
 };
 
 export default SectionsDisplay;
-
