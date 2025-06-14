@@ -29,20 +29,22 @@ const LeadershipSection = () => {
           {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
         </h2>
 
-        {/* viewport shows only two cards */}
-        <div className="overflow-hidden">
-          <div className="flex animate-scroll-left-50">
-            {[...leadership, ...leadership].map((p, i) => (
-              <div key={i} className="flex-shrink-0 w-1/2 md:w-1/4 px-4">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
-                    <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+        {/* centered viewport shows only two cards */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-4xl overflow-hidden">
+            <div className="flex animate-scroll-left-50">
+              {[...leadership, ...leadership].map((p, i) => (
+                <div key={i} className="flex-shrink-0 w-1/2 px-6">
+                  <div className="text-center">
+                    <div className="w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
+                      <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">{p.title}</h3>
+                    <p className="text-gray-600">{p.name}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{p.title}</h3>
-                  <p className="text-gray-600">{p.name}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
