@@ -17,7 +17,10 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean
+          location: string | null
+          meeting_time: string | null
           name: string
+          secretary_phone: string | null
           updated_at: string
         }
         Insert: {
@@ -27,7 +30,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          location?: string | null
+          meeting_time?: string | null
           name: string
+          secretary_phone?: string | null
           updated_at?: string
         }
         Update: {
@@ -37,7 +43,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          location?: string | null
+          meeting_time?: string | null
           name?: string
+          secretary_phone?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -50,7 +59,10 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean
+          location: string | null
+          meeting_time: string | null
           name: string
+          secretary_phone: string | null
           updated_at: string
         }
         Insert: {
@@ -60,7 +72,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          location?: string | null
+          meeting_time?: string | null
           name: string
+          secretary_phone?: string | null
           updated_at?: string
         }
         Update: {
@@ -70,7 +85,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          location?: string | null
+          meeting_time?: string | null
           name?: string
+          secretary_phone?: string | null
           updated_at?: string
         }
         Relationships: []

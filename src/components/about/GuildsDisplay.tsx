@@ -8,6 +8,9 @@ interface Guild {
   name: string;
   image_url?: string | null;
   details?: string | null;
+  meeting_time?: string | null;
+  location?: string | null;
+  secretary_phone?: string | null;
 }
 
 const GuildsDisplay = () => {
@@ -51,7 +54,7 @@ const GuildsDisplay = () => {
             <div className="flex overflow-hidden">
               <div className="flex animate-scroll-left-35">
                 {[...guilds, ...guilds].map((g, i) => (
-                  <div key={g.id + '-' + i} className="flex-shrink-0 mx-4">
+                  <div key={g.id + '-' + i} className="flex-shrink-0 mx-4 flex flex-col items-center">
                     <div className="w-48 h-48 rounded-lg overflow-hidden shadow-lg">
                       <img src={g.image_url || "/placeholder.svg"} alt={g.name} className="w-full h-full object-cover" />
                     </div>
@@ -64,26 +67,41 @@ const GuildsDisplay = () => {
         ) : (
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             {guilds.map((g, i) => (
-              <Card key={g.id} className="overflow-hidden shadow-lg cursor-pointer h-64 group">
-                <CardContent className="p-0 h-full">
-                  <div className="relative h-full">
-                    <img src={g.image_url || "/placeholder.svg"} alt={g.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
-                      <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
-                        <h3 className="text-lg font-bold mb-2">{g.name}</h3>
-                        <p className="text-sm">{g.details}</p>
+              <div key={g.id} className="h-64 flip-card group">
+                <div className="flip-card-inner w-full h-full">
+                  {/* Front */}
+                  <div className="flip-card-front rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
+                    <div className="flex-1">
+                      <img src={g.image_url || "/placeholder.svg"} alt={g.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <p className="text-center mt-2 font-medium bg-white bg-opacity-90 py-2">{g.name}</p>
+                    </div>
+                  </div>
+                  {/* Back */}
+                  <div className="flip-card-back rounded-lg shadow-lg overflow-hidden flex flex-col h-full p-4 bg-sky-700">
+                    <div className="flex flex-col flex-1 justify-center text-white text-center">
+                      <div>
+                        <p className="font-bold text-lg mb-2">{g.name}</p>
+                        <p className="text-sm mb-1">{g.details}</p>
+                        {g.meeting_time && <p className="text-xs"><b>Time:</b> {g.meeting_time}</p>}
+                        {g.location && <p className="text-xs"><b>Location:</b> {g.location}</p>}
+                        {g.secretary_phone && <p className="text-xs"><b>Phone:</b> {g.secretary_phone}</p>}
                       </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         )}
 
         <div className="text-center">
           <button
-            onClick={() => setGuildsExpanded(!guildsExpanded)}
+            onClick={() => {
+              setGuildsExpanded(!guildsExpanded);
+              if (!guildsExpanded) window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             {guildsExpanded ? 'Show Less' : 'All Guilds'}
@@ -93,5 +111,4 @@ const GuildsDisplay = () => {
     </section>
   );
 };
-
 export default GuildsDisplay;
