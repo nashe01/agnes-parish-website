@@ -25,7 +25,7 @@ const About = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-scroll-left-50 {
-          animation: scroll-left-50 28s linear infinite;
+          animation: scroll-left-50 15s linear infinite;
         }
         .flip-card {
           perspective: 1000px;
