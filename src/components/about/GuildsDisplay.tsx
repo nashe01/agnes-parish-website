@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { supabase } from '@/integrations/supabase/client';
 
 interface Guild {
@@ -55,8 +56,14 @@ const GuildsDisplay = () => {
               <div className="flex animate-scroll-left-35">
                 {[...guilds, ...guilds].map((g, i) => (
                   <div key={g.id + '-' + i} className="flex-shrink-0 mx-4 flex flex-col items-center">
-                    <div className="w-48 h-48 rounded-lg overflow-hidden shadow-lg">
-                      <img src={g.image_url || "/placeholder.svg"} alt={g.name} className="w-full h-full object-cover" />
+                    <div className="w-48 rounded-lg overflow-hidden shadow-lg">
+                      <AspectRatio ratio={16 / 9}>
+                        <img
+                          src={g.image_url || "/placeholder.svg"}
+                          alt={g.name}
+                          className="object-cover w-full h-full"
+                        />
+                      </AspectRatio>
                     </div>
                     <p className="text-center mt-2 font-medium">{g.name}</p>
                   </div>
@@ -65,32 +72,46 @@ const GuildsDisplay = () => {
             </div>
           </div>
         ) : (
-          <div className="grid md:grid-cols-4 gap-6 mb-8">
-            {guilds.map((g, i) => (
-              <div key={g.id} className="h-64 flip-card group">
+          // Expanded: show uniform grid, no overlap, top aligned with landscape images
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
+            {guilds.map((g) => (
+              <div key={g.id} className="flip-card group h-full flex flex-col">
                 <div className="flip-card-inner w-full h-full">
                   {/* Front */}
-                  <div className="flip-card-front rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
-                    <div className="flex-1">
-                      <img src={g.image_url || "/placeholder.svg"} alt={g.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <p className="text-center mt-2 font-medium bg-white bg-opacity-90 py-2">{g.name}</p>
-                    </div>
+                  <div className="flip-card-front rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-white">
+                    <AspectRatio ratio={16 / 9}>
+                      <img
+                        src={g.image_url || "/placeholder.svg"}
+                        alt={g.name}
+                        className="object-cover w-full h-full"
+                      />
+                    </AspectRatio>
                   </div>
                   {/* Back */}
-                  <div className="flip-card-back rounded-lg shadow-lg overflow-hidden flex flex-col h-full p-4 bg-sky-700">
-                    <div className="flex flex-col flex-1 justify-center text-white text-center">
-                      <div>
-                        <p className="font-bold text-lg mb-2">{g.name}</p>
-                        <p className="text-sm mb-1">{g.details}</p>
-                        {g.meeting_time && <p className="text-xs"><b>Time:</b> {g.meeting_time}</p>}
-                        {g.location && <p className="text-xs"><b>Location:</b> {g.location}</p>}
-                        {g.secretary_phone && <p className="text-xs"><b>Phone:</b> {g.secretary_phone}</p>}
-                      </div>
+                  <div className="flip-card-back rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-sky-700 p-4">
+                    <div className="flex flex-col flex-1 justify-center text-white text-center gap-2">
+                      {g.details && <p className="text-sm mb-1">{g.details}</p>}
+                      {g.meeting_time && (
+                        <p className="text-xs">
+                          <b>Time:</b> {g.meeting_time}
+                        </p>
+                      )}
+                      {g.location && (
+                        <p className="text-xs">
+                          <b>Location:</b> {g.location}
+                        </p>
+                      )}
+                      {g.secretary_phone && (
+                        <p className="text-xs">
+                          <b>Phone:</b> {g.secretary_phone}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
+                <p className="text-center mt-3 font-semibold bg-white bg-opacity-90 py-2 rounded-b-lg">
+                  {g.name}
+                </p>
               </div>
             ))}
           </div>
@@ -111,4 +132,5 @@ const GuildsDisplay = () => {
     </section>
   );
 };
+
 export default GuildsDisplay;
