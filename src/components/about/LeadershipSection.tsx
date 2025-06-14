@@ -25,9 +25,13 @@ const LeadershipSection = () => {
   return (
     <section className="py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
           {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
         </h2>
+        
+        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
+          Meet the dedicated clergy and staff who guide our parish community in faith, worship, and service.
+        </p>
 
         {/* very narrow centered container */}
         <div className="flex justify-center">

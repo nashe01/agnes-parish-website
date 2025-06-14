@@ -15,7 +15,11 @@ const SectionsDisplay = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Sections</h2>
+        <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Sections</h2>
+        
+        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
+          Explore the various liturgical ministries and volunteer opportunities that make our worship meaningful and welcoming.
+        </p>
 
         {!sectionsExpanded ? (
           <div className="mb-8">

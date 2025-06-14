@@ -15,7 +15,11 @@ const GuildsDisplay = () => {
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Guilds</h2>
+        <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Guilds</h2>
+        
+        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
+          Discover our parish organizations and ministries that foster fellowship, faith formation, and community service.
+        </p>
 
         {!guildsExpanded ? (
           <div className="mb-8">
