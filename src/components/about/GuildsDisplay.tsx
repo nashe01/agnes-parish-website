@@ -72,47 +72,40 @@ const GuildsDisplay = () => {
             </div>
           </div>
         ) : (
-          // Expanded: show uniform grid, no overlap, top aligned with landscape images
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
             {guilds.map((g) => (
-              <div key={g.id} className="flip-card group h-full flex flex-col">
-                <div className="flip-card-inner w-full h-full">
-                  {/* Front */}
-                  <div className="flip-card-front rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-white">
-                    <AspectRatio ratio={16 / 9}>
-                      <img
-                        src={g.image_url || "/placeholder.svg"}
-                        alt={g.name}
-                        className="object-cover w-full h-full"
-                      />
-                    </AspectRatio>
+              <Card key={g.id} className="flex flex-col h-full">
+                <AspectRatio ratio={16 / 9}>
+                  <img
+                    src={g.image_url || "/placeholder.svg"}
+                    alt={g.name}
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <CardContent className="flex flex-1 flex-col items-center justify-between p-4 text-center !pt-4">
+                  <p className="font-semibold text-lg">{g.name}</p>
+                  {g.details && (
+                    <p className="text-sm text-gray-700 mt-2 mb-1">{g.details}</p>
+                  )}
+                  <div className="text-xs text-gray-500 space-y-1 mt-1">
+                    {g.meeting_time && (
+                      <div>
+                        <b>Time:</b> {g.meeting_time}
+                      </div>
+                    )}
+                    {g.location && (
+                      <div>
+                        <b>Location:</b> {g.location}
+                      </div>
+                    )}
+                    {g.secretary_phone && (
+                      <div>
+                        <b>Phone:</b> {g.secretary_phone}
+                      </div>
+                    )}
                   </div>
-                  {/* Back */}
-                  <div className="flip-card-back rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-sky-700 p-4">
-                    <div className="flex flex-col flex-1 justify-center text-white text-center gap-2">
-                      {g.details && <p className="text-sm mb-1">{g.details}</p>}
-                      {g.meeting_time && (
-                        <p className="text-xs">
-                          <b>Time:</b> {g.meeting_time}
-                        </p>
-                      )}
-                      {g.location && (
-                        <p className="text-xs">
-                          <b>Location:</b> {g.location}
-                        </p>
-                      )}
-                      {g.secretary_phone && (
-                        <p className="text-xs">
-                          <b>Phone:</b> {g.secretary_phone}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-center mt-3 font-semibold bg-white bg-opacity-90 py-2 rounded-b-lg">
-                  {g.name}
-                </p>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
@@ -134,3 +127,4 @@ const GuildsDisplay = () => {
 };
 
 export default GuildsDisplay;
+

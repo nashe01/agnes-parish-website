@@ -71,47 +71,40 @@ const SectionsDisplay = () => {
             </div>
           </div>
         ) : (
-          // Expanded: show uniform grid, no overlap, top aligned with landscape images
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
             {sections.map((s) => (
-              <div key={s.id} className="flip-card group h-full flex flex-col">
-                <div className="flip-card-inner w-full h-full">
-                  {/* Front */}
-                  <div className="flip-card-front rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-white">
-                    <AspectRatio ratio={16 / 9}>
-                      <img
-                        src={s.image_url || "/placeholder.svg"}
-                        alt={s.name}
-                        className="object-cover w-full h-full"
-                      />
-                    </AspectRatio>
+              <Card key={s.id} className="flex flex-col h-full">
+                <AspectRatio ratio={16 / 9}>
+                  <img
+                    src={s.image_url || "/placeholder.svg"}
+                    alt={s.name}
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <CardContent className="flex flex-1 flex-col items-center justify-between p-4 text-center !pt-4">
+                  <p className="font-semibold text-lg">{s.name}</p>
+                  {s.details && (
+                    <p className="text-sm text-gray-700 mt-2 mb-1">{s.details}</p>
+                  )}
+                  <div className="text-xs text-gray-500 space-y-1 mt-1">
+                    {s.meeting_time && (
+                      <div>
+                        <b>Time:</b> {s.meeting_time}
+                      </div>
+                    )}
+                    {s.location && (
+                      <div>
+                        <b>Location:</b> {s.location}
+                      </div>
+                    )}
+                    {s.secretary_phone && (
+                      <div>
+                        <b>Phone:</b> {s.secretary_phone}
+                      </div>
+                    )}
                   </div>
-                  {/* Back */}
-                  <div className="flip-card-back rounded-lg shadow-lg overflow-hidden flex flex-col h-full bg-sky-700 p-4">
-                    <div className="flex flex-col flex-1 justify-center text-white text-center gap-2">
-                      {s.details && <p className="text-sm mb-1">{s.details}</p>}
-                      {s.meeting_time && (
-                        <p className="text-xs">
-                          <b>Time:</b> {s.meeting_time}
-                        </p>
-                      )}
-                      {s.location && (
-                        <p className="text-xs">
-                          <b>Location:</b> {s.location}
-                        </p>
-                      )}
-                      {s.secretary_phone && (
-                        <p className="text-xs">
-                          <b>Phone:</b> {s.secretary_phone}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-center mt-3 font-semibold bg-white bg-opacity-90 py-2 rounded-b-lg">
-                  {s.name}
-                </p>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
@@ -133,3 +126,4 @@ const SectionsDisplay = () => {
 };
 
 export default SectionsDisplay;
+
