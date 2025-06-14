@@ -29,12 +29,12 @@ const LeadershipSection = () => {
           {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
         </h2>
 
-        {/* centered container with smaller cards */}
+        {/* narrower centered container with reduced spacing */}
         <div className="flex justify-center">
-          <div className="w-full max-w-2xl overflow-hidden">
+          <div className="w-full max-w-lg overflow-hidden">
             <div className="flex animate-scroll-left-50">
               {[...leadership, ...leadership].map((p, i) => (
-                <div key={i} className="flex-shrink-0 w-1/2 px-3">
+                <div key={i} className="flex-shrink-0 w-1/2 px-1">
                   <div className="text-center">
                     <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden shadow-lg">
                       <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
