@@ -21,9 +21,14 @@ const SectionsDisplay = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Sections</h2>
         
-        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
-          Explore the various liturgical ministries and volunteer opportunities that make our worship meaningful and welcoming.
-        </p>
+        <div className="text-gray-600 text-lg text-center mb-12 max-w-4xl mx-auto">
+          <p className="mb-2 font-medium">SECTIONS SECTION</p>
+          <p className="mb-2">Explore the various liturgical ministries and volunteer opportunities that make our worship meaningful and welcoming.</p>
+          <p className="mb-2">Our sections represent the heart of parish participation, where every member can find their calling to serve.</p>
+          <p className="mb-2">From the sacred duties performed during Mass to the behind-the-scenes work that keeps our parish running smoothly.</p>
+          <p className="mb-2">Each section offers unique opportunities for spiritual growth, community building, and service to others.</p>
+          <p>Whether you're drawn to liturgical roles or prefer administrative support, there's a place for everyone to contribute their gifts.</p>
+        </div>
 
         {!sectionsExpanded ? (
           <div className="mb-8">

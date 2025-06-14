@@ -21,9 +21,14 @@ const GuildsDisplay = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Guilds</h2>
         
-        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
-          Discover our parish organizations and ministries that foster fellowship, faith formation, and community service.
-        </p>
+        <div className="text-gray-600 text-lg text-center mb-12 max-w-4xl mx-auto">
+          <p className="mb-2 font-medium">GUILDS SECTION</p>
+          <p className="mb-2">Discover our parish organizations and ministries that foster fellowship, faith formation, and community service.</p>
+          <p className="mb-2">Our guilds represent the diverse ways parishioners can deepen their faith while serving others in meaningful ways.</p>
+          <p className="mb-2">From charitable works to spiritual enrichment, each guild offers unique opportunities for personal growth and community engagement.</p>
+          <p className="mb-2">These organizations have been the backbone of our parish life for decades, creating lasting friendships and spiritual bonds.</p>
+          <p>Join one of our guilds and become part of a tradition of service, prayer, and fellowship that strengthens our entire community.</p>
+        </div>
 
         {!guildsExpanded ? (
           <div className="mb-8">
