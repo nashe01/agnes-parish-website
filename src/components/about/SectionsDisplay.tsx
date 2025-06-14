@@ -15,12 +15,12 @@ const SectionsDisplay = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Sections</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">Sections</h2>
 
         {!sectionsExpanded ? (
           <div className="mb-8">
             <div className="flex overflow-hidden">
-              <div className="flex animate-scroll-left-50">
+              <div className="flex animate-scroll-left-25">
                 {[...sections, ...sections].map((s, i) => (
                   <div key={i} className="flex-shrink-0 mx-4">
                     <div className="w-48 h-48 rounded-lg overflow-hidden shadow-lg">
