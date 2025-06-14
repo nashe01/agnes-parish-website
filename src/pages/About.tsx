@@ -24,15 +24,15 @@ const About = () => {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        @keyframes scroll-left-25 {
+        @keyframes scroll-left-35 {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
         .animate-scroll-left-50 {
           animation: scroll-left-50 15s linear infinite;
         }
-        .animate-scroll-left-25 {
-          animation: scroll-left-25 25s linear infinite;
+        .animate-scroll-left-35 {
+          animation: scroll-left-35 35s linear infinite;
         }
         .flip-card {
           perspective: 1000px;

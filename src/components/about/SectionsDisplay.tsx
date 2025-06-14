@@ -10,6 +10,10 @@ const SectionsDisplay = () => {
     { name: 'Lectors',              image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=300&q=80', details: 'Proclaiming the Word of God during Mass and other services.' },
     { name: 'Eucharistic Ministers',image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=300&q=80', details: 'Assisting with the distribution of Holy Communion.' },
     { name: 'Ushers',               image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80', details: 'Welcoming parishioners and maintaining order during services.' },
+    { name: 'Choir Members',        image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=300&q=80', details: 'Leading the congregation in song and worship through music.' },
+    { name: 'Sacristans',          image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=300&q=80', details: 'Preparing the altar and sacred vessels for liturgical celebrations.' },
+    { name: 'Greeters',            image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=300&q=80', details: 'Welcoming visitors and new parishioners with warm hospitality.' },
+    { name: 'Collection Counters',  image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=300&q=80', details: 'Responsibly managing and counting parish donations and offerings.' },
   ];
 
   return (
@@ -24,7 +28,7 @@ const SectionsDisplay = () => {
         {!sectionsExpanded ? (
           <div className="mb-8">
             <div className="flex overflow-hidden">
-              <div className="flex animate-scroll-left-25">
+              <div className="flex animate-scroll-left-35">
                 {[...sections, ...sections].map((s, i) => (
                   <div key={i} className="flex-shrink-0 mx-4">
                     <div className="w-48 h-48 rounded-lg overflow-hidden shadow-lg">
