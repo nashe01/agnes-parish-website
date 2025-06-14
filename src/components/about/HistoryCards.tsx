@@ -50,6 +50,17 @@ Today, we honor our past while looking toward the future, committed to serving G
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
+            A Peak Into History
+          </h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            Discover the rich heritage of our patron saint and the remarkable journey of our parish community. 
+            These interactive cards reveal the stories that have shaped our faith and guided our mission for generations.
+          </p>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12">
           {/* Saint Agnes Card */}
           <div className="flip-card h-[450px]">
