@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, User, FileText, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AboutUsSection = () => {
@@ -101,13 +101,28 @@ const AboutUsSection = () => {
           </button>
         </div>
 
-        {/* Bullet Notes Below Button, Aligned Left */}
-        <div className="mt-6 max-w-5xl mx-auto">
-          <ul className="list-disc list-inside text-gray-700 text-base">
-            <li>Download PDFs of our full parish history</li>
-            <li>Explore the various guilds and sections of the church</li>
+        {/* Bullet Notes with Animation */}
+        <motion.div
+          className="mt-6 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+        >
+          <ul className="space-y-3 text-gray-700 text-base">
+            <li className="flex items-start gap-2">
+              <User className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Know our spiritual leaders</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <FileText className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Download PDFs of our full parish history</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Users className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Explore the various guilds and sections of the church</span>
+            </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
