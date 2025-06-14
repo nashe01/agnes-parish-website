@@ -36,6 +36,21 @@ const AboutUsSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Motion variants for staggered list
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,28 +116,26 @@ const AboutUsSection = () => {
           </button>
         </div>
 
-        {/* Bullet Notes with Animation */}
-        <motion.div
-          className="mt-6 max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
+        {/* Animated Bullet Notes */}
+        <motion.ul
+          className="mt-6 max-w-5xl mx-auto space-y-3 text-gray-900 text-base"
+          variants={listVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <ul className="space-y-3 text-gray-700 text-base">
-            <li className="flex items-start gap-2">
-              <User className="w-5 h-5 text-sky-600 mt-1" />
-              <span>Know our spiritual leaders</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <FileText className="w-5 h-5 text-sky-600 mt-1" />
-              <span>Download PDFs of our full parish history</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Users className="w-5 h-5 text-sky-600 mt-1" />
-              <span>Explore the various guilds and sections of the church</span>
-            </li>
-          </ul>
-        </motion.div>
+          <motion.li className="flex items-start gap-2" variants={itemVariants}>
+            <User className="w-5 h-5 text-sky-600 mt-1" />
+            <span>Know our spiritual leaders</span>
+          </motion.li>
+          <motion.li className="flex items-start gap-2" variants={itemVariants}>
+            <FileText className="w-5 h-5 text-sky-600 mt-1" />
+            <span>Download PDFs of our full parish history</span>
+          </motion.li>
+          <motion.li className="flex items-start gap-2" variants={itemVariants}>
+            <Users className="w-5 h-5 text-sky-600 mt-1" />
+            <span>Explore the various guilds and sections of the church</span>
+          </motion.li>
+        </motion.ul>
       </div>
     </section>
   );
