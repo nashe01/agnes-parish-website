@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -7,6 +6,7 @@ import LeadershipSection from '@/components/about/LeadershipSection';
 import HistoryCards from '@/components/about/HistoryCards';
 import SectionsDisplay from '@/components/about/SectionsDisplay';
 import GuildsDisplay from '@/components/about/GuildsDisplay';
+import AboutFooter from '@/components/about/AboutFooter';
 
 const About = () => {
   const navigate = useNavigate();
@@ -78,6 +78,7 @@ const About = () => {
         {/* ───── GUILDS ───── */}
         <GuildsDisplay />
       </main>
+      <AboutFooter />
     </div>
   );
 };
