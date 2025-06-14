@@ -27,6 +27,13 @@ const About = () => {
         .animate-scroll-left-50 {
           animation: scroll-left-50 28s linear infinite;
         }
+        @keyframes scroll-left-seamless {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-33.333%); }
+        }
+        .animate-scroll-left-seamless {
+          animation: scroll-left-seamless 20s linear infinite;
+        }
         .flip-card {
           perspective: 1000px;
         }
