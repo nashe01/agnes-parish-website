@@ -33,13 +33,9 @@ const LeadershipSection = () => {
           {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
         </h2>
         
-        <div className="text-gray-600 text-lg text-center mb-4 max-w-4xl mx-auto">
-          <p className="mb-2 font-medium">LEADERSHIP SECTION</p>
-          <p className="mb-2">Meet the dedicated clergy and staff who guide our parish community in faith, worship, and service.</p>
-          <p className="mb-2">Our leadership team brings together years of experience, deep spiritual wisdom, and unwavering commitment to serving God and our parishioners.</p>
-          <p className="mb-2">From pastoral care to administrative excellence, each member plays a vital role in maintaining our vibrant faith community.</p>
-          <p>Together, they work tirelessly to ensure that every parishioner feels welcomed, supported, and spiritually nourished.</p>
-        </div>
+        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
+          Meet the dedicated clergy and staff who guide our parish community in faith, worship, and service.
+        </p>
 
         {/* very narrow centered container */}
         <div className="flex justify-center">
