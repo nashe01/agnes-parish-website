@@ -32,16 +32,15 @@ const LeadershipSection = () => {
         {/* even narrower centered container */}
         <div className="flex justify-center">
           <div className="w-full max-w-md overflow-hidden">
-            <div className="flex animate-scroll-left-seamless">
-              {/* Triple the cards for seamless scrolling */}
-              {[...leadership, ...leadership, ...leadership].map((p, i) => (
-                <div key={i} className="flex-shrink-0 w-1/4 px-1">
+            <div className="flex animate-scroll-left-50">
+              {[...leadership, ...leadership].map((p, i) => (
+                <div key={i} className="flex-shrink-0 w-1/2 px-1">
                   <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-2 rounded-full overflow-hidden shadow-lg">
+                    <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden shadow-lg">
                       <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900">{p.title}</h3>
-                    <p className="text-xs text-gray-600">{p.name}</p>
+                    <h3 className="text-lg font-semibold text-gray-900">{p.title}</h3>
+                    <p className="text-sm text-gray-600">{p.name}</p>
                   </div>
                 </div>
               ))}
