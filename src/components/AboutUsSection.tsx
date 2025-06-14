@@ -90,13 +90,8 @@ const AboutUsSection = () => {
           </AnimatePresence>
         </div>
 
-        {/* Learn More and Bullet Notes */}
-        <div className="flex flex-col items-center md:flex-row md:justify-center gap-8 mt-16">
-          <ul className="text-gray-600 list-disc list-inside text-base max-w-md">
-            <li>Download PDFs of our full parish history</li>
-            <li>Explore the various guilds and sections of the church</li>
-          </ul>
-
+        {/* Learn More Button */}
+        <div className="flex justify-center mt-16">
           <button
             onClick={() => navigate('/about')}
             className="group flex items-center bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 px-6 py-2 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -104,6 +99,14 @@ const AboutUsSection = () => {
             Learn More About
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
+        </div>
+
+        {/* Bullet Notes Below Button, Aligned Left */}
+        <div className="mt-6 max-w-5xl mx-auto">
+          <ul className="list-disc list-inside text-gray-700 text-base">
+            <li>Download PDFs of our full parish history</li>
+            <li>Explore the various guilds and sections of the church</li>
+          </ul>
         </div>
       </div>
     </section>
