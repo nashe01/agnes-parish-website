@@ -37,11 +37,11 @@ const AboutUsSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold" style={{ color: 'rgb(14,165,233)' }}>
+          <h2 className="text-4xl font-bold text-sky-500">
             About Us
           </h2>
           <p className="text-xl text-gray-600">Our Faith, Our Community, Our Story</p>
@@ -68,10 +68,9 @@ const AboutUsSection = () => {
               </div>
 
               {/* Text Section */}
-              <div className="p-8 flex flex-col justify-start bg-gray-50 h-[460px]">
+              <div className="p-8 flex flex-col justify-start bg-white h-[460px]">
                 <motion.h3
-                  className="text-3xl font-bold mb-4"
-                  style={{ color: 'rgb(14,165,233)' }}
+                  className="text-3xl font-bold mb-4 text-sky-500"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.2 }}
@@ -91,13 +90,18 @@ const AboutUsSection = () => {
           </AnimatePresence>
         </div>
 
-        {/* Learn More Button */}
-        <div className="flex justify-center mt-32">
+        {/* Learn More and Bullet Notes */}
+        <div className="flex flex-col items-center md:flex-row md:justify-center gap-8 mt-16">
+          <ul className="text-gray-600 list-disc list-inside text-base max-w-md">
+            <li>Download PDFs of our full parish history</li>
+            <li>Explore the various guilds and sections of the church</li>
+          </ul>
+
           <button
             onClick={() => navigate('/about')}
             className="group flex items-center bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 px-6 py-2 rounded-full font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            Learn More
+            Learn More About
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
         </div>
