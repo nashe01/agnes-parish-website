@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 const LeadershipSection = () => {
@@ -6,7 +5,7 @@ const LeadershipSection = () => {
 
   /* ───── typing animation for heading ───── */
   useEffect(() => {
-    const full = 'Our Leadership';
+    const full = 'Our Spiritual Leaders';
     let i = 0;
     const id = setInterval(() => {
       setTypedText(full.slice(0, ++i));
