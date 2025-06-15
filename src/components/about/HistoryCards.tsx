@@ -1,9 +1,100 @@
 
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Download } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+interface PDF {
+  id: string;
+  name: string;
+  description?: string;
+  file_url: string;
+  file_size?: number;
+}
 
 const HistoryCards = () => {
+  const [pdfs, setPdfs] = useState<PDF[]>([]);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchPDFs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('downloadable_pdfs')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order');
+        
+        if (error) throw error;
+        setPdfs(data || []);
+      } catch (error) {
+        console.error('Error fetching PDFs:', error);
+      }
+    };
+
+    fetchPDFs();
+  }, []);
+
+  const handleDownload = async (pdfType: 'saint' | 'parish') => {
+    try {
+      // Find the appropriate PDF based on type
+      const targetPdf = pdfs.find(pdf => {
+        if (pdfType === 'saint') {
+          return pdf.name.toLowerCase().includes('saint') || pdf.name.toLowerCase().includes('agnes');
+        } else {
+          return pdf.name.toLowerCase().includes('parish') || pdf.name.toLowerCase().includes('church');
+        }
+      });
+
+      if (!targetPdf) {
+        toast({
+          title: "Document Not Found",
+          description: `${pdfType === 'saint' ? 'Saint Agnes' : 'Parish'} history document is not available.`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Check if it's a placeholder URL
+      if (targetPdf.file_url.startsWith('/placeholder-')) {
+        toast({
+          title: "Document Not Available",
+          description: `${targetPdf.name} is not yet available for download. Please check back later.`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Check if it's a Supabase storage URL
+      if (targetPdf.file_url.includes('supabase')) {
+        window.open(targetPdf.file_url, '_blank');
+      } else {
+        // For external URLs or local files
+        const link = document.createElement('a');
+        link.href = targetPdf.file_url;
+        link.download = targetPdf.name;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      toast({
+        title: "Download Started",
+        description: `Downloading ${targetPdf.name}`,
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: "Download Failed",
+        description: "Unable to download the document. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const historyData = {
     stAgnes: {
       title: "Saint Agnes of Rome",
@@ -96,9 +187,12 @@ Today, we honor our past while looking toward the future, committed to serving G
                         {historyData.stAgnes.history}
                       </p>
                     </ScrollArea>
-                    <button className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <button 
+                      onClick={() => handleDownload('saint')}
+                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    >
                       <Download className="w-5 h-5 mr-2" />
-                      Download Full History PDF
+                      Download Saint Agnes History PDF
                     </button>
                   </CardContent>
                 </Card>
@@ -140,9 +234,12 @@ Today, we honor our past while looking toward the future, committed to serving G
                         {historyData.church.history}
                       </p>
                     </ScrollArea>
-                    <button className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <button 
+                      onClick={() => handleDownload('parish')}
+                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    >
                       <Download className="w-5 h-5 mr-2" />
-                      Download Full History PDF
+                      Download Parish History PDF
                     </button>
                   </CardContent>
                 </Card>

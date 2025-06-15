@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -6,7 +7,6 @@ import LeadershipSection from '@/components/about/LeadershipSection';
 import HistoryCards from '@/components/about/HistoryCards';
 import SectionsDisplay from '@/components/about/SectionsDisplay';
 import GuildsDisplay from '@/components/about/GuildsDisplay';
-import DownloadablePDFs from '@/components/DownloadablePDFs';
 import AboutFooter from '@/components/about/AboutFooter';
 
 const About = () => {
@@ -78,9 +78,6 @@ const About = () => {
 
         {/* ───── GUILDS ───── */}
         <GuildsDisplay />
-
-        {/* ───── DOWNLOADABLE PDFs ───── */}
-        <DownloadablePDFs />
       </main>
       <AboutFooter />
     </div>
