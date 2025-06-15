@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Trash2, Edit, Plus, Download } from 'lucide-react';
+import { Trash2, Edit, Download, AlertCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import FileUpload from './FileUpload';
@@ -165,6 +165,27 @@ const PDFManager = () => {
     setFormData({ ...formData, file_url: url });
   };
 
+  const testDownload = async (pdf: PDF) => {
+    try {
+      if (pdf.file_url.startsWith('/placeholder-')) {
+        toast({
+          title: "Placeholder File",
+          description: "This is a placeholder. Upload a real PDF file to enable downloads.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      window.open(pdf.file_url, '_blank');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to open PDF",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (isLoading) {
     return <div>Loading PDFs...</div>;
   }
@@ -174,6 +195,17 @@ const PDFManager = () => {
       <Card>
         <CardHeader>
           <CardTitle>{editingPdf ? 'Edit PDF' : 'Add New PDF'}</CardTitle>
+          <div className="flex items-start gap-2 p-4 bg-blue-50 rounded-lg">
+            <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <div className="text-sm text-blue-800">
+              <p className="font-medium mb-1">How to add PDF files:</p>
+              <ol className="list-decimal list-inside space-y-1 text-xs">
+                <li>Upload your PDF file using the file upload below</li>
+                <li>Or paste a direct URL to a PDF file hosted elsewhere</li>
+                <li>Placeholder files (starting with /placeholder-) won't be downloadable</li>
+              </ol>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -206,6 +238,17 @@ const PDFManager = () => {
             />
 
             <div>
+              <Label htmlFor="file_url">Or enter PDF URL directly</Label>
+              <Input
+                id="file_url"
+                value={formData.file_url}
+                onChange={(e) => setFormData({ ...formData, file_url: e.target.value })}
+                placeholder="https://example.com/document.pdf"
+                required
+              />
+            </div>
+
+            <div>
               <Label htmlFor="display_order">Display Order</Label>
               <Input
                 id="display_order"
@@ -235,41 +278,55 @@ const PDFManager = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {pdfs.map((pdf) => (
-              <div key={pdf.id} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h3 className="font-semibold">{pdf.name}</h3>
-                  {pdf.description && (
-                    <p className="text-sm text-gray-600 mt-1">{pdf.description}</p>
-                  )}
-                  <div className="flex items-center gap-4 text-xs text-gray-500 mt-2">
-                    <span>Order: {pdf.display_order}</span>
-                    <span>Status: {pdf.is_active ? 'Active' : 'Inactive'}</span>
-                    {pdf.file_size && <span>Size: {Math.round(pdf.file_size / 1024)} KB</span>}
+            {pdfs.map((pdf) => {
+              const isPlaceholder = pdf.file_url.startsWith('/placeholder-');
+              
+              return (
+                <div key={pdf.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold">{pdf.name}</h3>
+                      {isPlaceholder && (
+                        <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                          Placeholder
+                        </span>
+                      )}
+                    </div>
+                    {pdf.description && (
+                      <p className="text-sm text-gray-600 mt-1">{pdf.description}</p>
+                    )}
+                    <div className="flex items-center gap-4 text-xs text-gray-500 mt-2">
+                      <span>Order: {pdf.display_order}</span>
+                      <span>Status: {pdf.is_active ? 'Active' : 'Inactive'}</span>
+                      {pdf.file_size && <span>Size: {Math.round(pdf.file_size / 1024)} KB</span>}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      onClick={() => testDownload(pdf)}
+                      disabled={isPlaceholder}
+                    >
+                      <Download className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={pdf.is_active ? "default" : "secondary"}
+                      onClick={() => toggleActive(pdf.id, pdf.is_active)}
+                    >
+                      {pdf.is_active ? 'Active' : 'Inactive'}
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => handleEdit(pdf)}>
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button size="sm" variant="destructive" onClick={() => handleDelete(pdf.id)}>
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Button size="sm" variant="outline" asChild>
-                    <a href={pdf.file_url} download target="_blank" rel="noopener noreferrer">
-                      <Download className="w-4 h-4" />
-                    </a>
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={pdf.is_active ? "default" : "secondary"}
-                    onClick={() => toggleActive(pdf.id, pdf.is_active)}
-                  >
-                    {pdf.is_active ? 'Active' : 'Inactive'}
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => handleEdit(pdf)}>
-                    <Edit className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="destructive" onClick={() => handleDelete(pdf.id)}>
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
             {pdfs.length === 0 && (
               <p className="text-center text-gray-500 py-8">No PDFs added yet</p>
             )}
