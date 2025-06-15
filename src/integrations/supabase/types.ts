@@ -159,6 +159,42 @@ export type Database = {
         }
         Relationships: []
       }
+      downloadable_pdfs: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          file_size: number | null
+          file_url: string
+          id: string
+          is_active: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          file_size?: number | null
+          file_url: string
+          id?: string
+          is_active?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          file_size?: number | null
+          file_url?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       gallery_photos: {
         Row: {
           caption: string

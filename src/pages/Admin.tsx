@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -12,6 +11,7 @@ import MinistriesManager from '@/components/admin/MinistriesManager';
 import SacramentsManager from '@/components/admin/SacramentsManager';
 import NewsManager from '@/components/admin/NewsManager';
 import GalleryManager from '@/components/admin/GalleryManager';
+import PDFManager from '@/components/admin/PDFManager';
 
 const Admin = () => {
   const { user, isAdmin, isLoading, signOut } = useAuth();
@@ -81,7 +81,7 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="hero" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="hero">Hero Section</TabsTrigger>
             <TabsTrigger value="mass">Mass Schedule</TabsTrigger>
             <TabsTrigger value="announcements">Announcements</TabsTrigger>
@@ -89,6 +89,7 @@ const Admin = () => {
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="news">News</TabsTrigger>
             <TabsTrigger value="gallery">Gallery</TabsTrigger>
+            <TabsTrigger value="pdfs">PDFs</TabsTrigger>
           </TabsList>
 
           <TabsContent value="hero">
@@ -164,6 +165,17 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <GalleryManager />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="pdfs">
+            <Card>
+              <CardHeader>
+                <CardTitle>PDF Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <PDFManager />
               </CardContent>
             </Card>
           </TabsContent>
