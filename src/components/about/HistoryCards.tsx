@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -140,21 +139,21 @@ Today, we honor our past while looking toward the future, committed to serving G
 
   return (
     <section className="py-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
             A Peak Into History
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Discover the rich heritage of our patron saint and the remarkable journey of our parish community. 
             These interactive cards reveal the stories that have shaped our faith and guided our mission for generations.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {/* Saint Agnes Card */}
-          <div className="flip-card h-[400px]">
+          <div className="flip-card h-[320px]">
             <div className="flip-card-inner relative w-full h-full">
               {/* Front */}
               <div className="flip-card-front absolute w-full h-full">
@@ -167,9 +166,9 @@ Today, we honor our past while looking toward the future, committed to serving G
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
-                        <div className="p-6 text-white">
-                          <h3 className="text-2xl font-bold">{historyData.stAgnes.title}</h3>
-                          <p className="text-sm opacity-90">Hover to learn more about our patron saint</p>
+                        <div className="p-4 text-white">
+                          <h3 className="text-xl font-bold">{historyData.stAgnes.title}</h3>
+                          <p className="text-xs opacity-90">Hover to learn more about our patron saint</p>
                         </div>
                       </div>
                     </div>
@@ -180,18 +179,18 @@ Today, we honor our past while looking toward the future, committed to serving G
               {/* Back */}
               <div className="flip-card-back absolute w-full h-full">
                 <Card className="h-full bg-gradient-to-br from-sky-50 to-sky-100">
-                  <CardContent className="p-6 h-full flex flex-col">
-                    <h3 className="text-xl font-bold text-sky-800 mb-4">{historyData.stAgnes.title}</h3>
-                    <ScrollArea className="flex-1 mb-4">
+                  <CardContent className="p-4 h-full flex flex-col">
+                    <h3 className="text-lg font-bold text-sky-800 mb-3">{historyData.stAgnes.title}</h3>
+                    <ScrollArea className="flex-1 mb-3">
                       <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
                         {historyData.stAgnes.history}
                       </p>
                     </ScrollArea>
                     <button 
                       onClick={() => handleDownload('saint')}
-                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-sm"
+                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-3 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-xs"
                     >
-                      <Download className="w-4 h-4 mr-2" />
+                      <Download className="w-3 h-3 mr-1" />
                       Download Saint Agnes History PDF
                     </button>
                   </CardContent>
@@ -201,7 +200,7 @@ Today, we honor our past while looking toward the future, committed to serving G
           </div>
 
           {/* Church History Card */}
-          <div className="flip-card h-[400px]">
+          <div className="flip-card h-[320px]">
             <div className="flip-card-inner relative w-full h-full">
               {/* Front */}
               <div className="flip-card-front absolute w-full h-full">
@@ -214,9 +213,9 @@ Today, we honor our past while looking toward the future, committed to serving G
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
-                        <div className="p-6 text-white">
-                          <h3 className="text-2xl font-bold">{historyData.church.title}</h3>
-                          <p className="text-sm opacity-90">Hover to discover our parish history</p>
+                        <div className="p-4 text-white">
+                          <h3 className="text-xl font-bold">{historyData.church.title}</h3>
+                          <p className="text-xs opacity-90">Hover to discover our parish history</p>
                         </div>
                       </div>
                     </div>
@@ -227,18 +226,18 @@ Today, we honor our past while looking toward the future, committed to serving G
               {/* Back */}
               <div className="flip-card-back absolute w-full h-full">
                 <Card className="h-full bg-gradient-to-br from-sky-50 to-sky-100">
-                  <CardContent className="p-6 h-full flex flex-col">
-                    <h3 className="text-xl font-bold text-sky-800 mb-4">{historyData.church.title}</h3>
-                    <ScrollArea className="flex-1 mb-4">
+                  <CardContent className="p-4 h-full flex flex-col">
+                    <h3 className="text-lg font-bold text-sky-800 mb-3">{historyData.church.title}</h3>
+                    <ScrollArea className="flex-1 mb-3">
                       <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
                         {historyData.church.history}
                       </p>
                     </ScrollArea>
                     <button 
                       onClick={() => handleDownload('parish')}
-                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-sm"
+                      className="flex items-center justify-center bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-3 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-xs"
                     >
-                      <Download className="w-4 h-4 mr-2" />
+                      <Download className="w-3 h-3 mr-1" />
                       Download Parish History PDF
                     </button>
                   </CardContent>
