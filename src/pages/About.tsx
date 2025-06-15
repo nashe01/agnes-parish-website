@@ -38,7 +38,7 @@ const About = () => {
           perspective: 1000px;
         }
         .flip-card-inner {
-          transition: transform 0.6s;
+          transition: transform 1.2s;
           transform-style: preserve-3d;
         }
         .flip-card:hover .flip-card-inner {
