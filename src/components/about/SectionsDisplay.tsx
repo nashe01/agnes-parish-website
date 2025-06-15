@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Clock, MapPin, Phone } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
 
 interface Section {
@@ -14,45 +12,6 @@ interface Section {
   location?: string | null;
   secretary_phone?: string | null;
 }
-
-const SectionCard = ({
-  name,
-  image_url,
-  meeting_time,
-  location,
-  secretary_phone,
-}: Section) => (
-  <Card className="flex flex-col h-full items-center shadow-lg">
-    <AspectRatio ratio={16/9} className="w-full">
-      <img
-        src={image_url || "/placeholder.svg"}
-        alt={name}
-        className="object-cover w-full h-full rounded-t-lg"
-      />
-    </AspectRatio>
-    <CardContent className="flex flex-col gap-2 items-center w-full p-4 text-center !pt-4">
-      <span className="font-semibold text-lg">{name}</span>
-      {meeting_time && (
-        <div className="flex items-center justify-center text-sm text-gray-700 gap-2">
-          <Clock className="w-4 h-4 text-sky-700" />
-          <span>{meeting_time}</span>
-        </div>
-      )}
-      {location && (
-        <div className="flex items-center justify-center text-sm text-gray-700 gap-2">
-          <MapPin className="w-4 h-4 text-sky-700" />
-          <span>{location}</span>
-        </div>
-      )}
-      {secretary_phone && (
-        <div className="flex items-center justify-center text-sm text-gray-700 gap-2">
-          <Phone className="w-4 h-4 text-sky-700" />
-          <span>{secretary_phone}</span>
-        </div>
-      )}
-    </CardContent>
-  </Card>
-);
 
 const SectionsDisplay = () => {
   const [sectionsExpanded, setSectionsExpanded] = useState(false);
@@ -94,8 +53,17 @@ const SectionsDisplay = () => {
             <div className="flex overflow-hidden">
               <div className="flex animate-scroll-left-35">
                 {[...sections, ...sections].map((s, i) => (
-                  <div key={s.id + '-' + i} className="flex-shrink-0 mx-4 flex flex-col items-center w-56">
-                    <SectionCard {...s} />
+                  <div key={s.id + '-' + i} className="flex-shrink-0 mx-4 flex flex-col items-center">
+                    <div className="w-48 rounded-lg overflow-hidden shadow-lg">
+                      <AspectRatio ratio={16 / 9}>
+                        <img
+                          src={s.image_url || "/placeholder.svg"}
+                          alt={s.name}
+                          className="object-cover w-full h-full"
+                        />
+                      </AspectRatio>
+                    </div>
+                    <p className="text-center mt-2 font-medium">{s.name}</p>
                   </div>
                 ))}
               </div>
@@ -104,7 +72,38 @@ const SectionsDisplay = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
             {sections.map((s) => (
-              <SectionCard key={s.id} {...s} />
+              <Card key={s.id} className="flex flex-col h-full">
+                <AspectRatio ratio={16 / 9}>
+                  <img
+                    src={s.image_url || "/placeholder.svg"}
+                    alt={s.name}
+                    className="object-cover w-full h-full"
+                  />
+                </AspectRatio>
+                <CardContent className="flex flex-1 flex-col items-center justify-between p-4 text-center !pt-4">
+                  <p className="font-semibold text-lg">{s.name}</p>
+                  {s.details && (
+                    <p className="text-sm text-gray-700 mt-2 mb-1">{s.details}</p>
+                  )}
+                  <div className="text-xs text-gray-500 space-y-1 mt-1">
+                    {s.meeting_time && (
+                      <div>
+                        <b>Time:</b> {s.meeting_time}
+                      </div>
+                    )}
+                    {s.location && (
+                      <div>
+                        <b>Location:</b> {s.location}
+                      </div>
+                    )}
+                    {s.secretary_phone && (
+                      <div>
+                        <b>Phone:</b> {s.secretary_phone}
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
