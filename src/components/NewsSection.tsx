@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { SectionFadeIn } from './SectionFadeIn';
 
 interface NewsArticle {
   id: string;
@@ -58,108 +59,110 @@ const NewsSection = () => {
   };
 
   return (
-    <section id="news" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">News & Updates</h2>
-          <p className="text-xl text-gray-600">Stay connected with parish life and activities</p>
-        </div>
-
-        {/* News Articles */}
-        {news.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-20">
-            {news.map((article, index) => (
-              <Card 
-                key={article.id} 
-                className={`hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${
-                  article.size === 'large' ? 'md:col-span-2 md:row-span-2' :
-                  article.size === 'medium' ? 'md:col-span-2' : 'md:col-span-1'
-                }`}
-              >
-                <CardContent className="p-0 h-full">
-                  {article.image_url && (
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={article.image_url} 
-                        alt={article.title}
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          {article.category}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <div className="text-sm text-gray-500 mb-2">{article.date}</div>
-                    {!article.image_url && (
-                      <div className="mb-3">
-                        <span className="bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold">
-                          {article.category}
-                        </span>
-                      </div>
-                    )}
-                    <h3 className={`font-bold text-gray-900 mb-3 ${
-                      article.size === 'large' ? 'text-2xl' : 'text-lg'
-                    }`}>
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600">{article.excerpt}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+    <SectionFadeIn direction="up">
+      <section id="news" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">News & Updates</h2>
+            <p className="text-xl text-gray-600">Stay connected with parish life and activities</p>
           </div>
-        )}
 
-        {/* Photo Gallery */}
-        {photos.length > 0 && (
-          <>
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Photo Gallery</h3>
-            </div>
-            
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll-right space-x-6">
-                {[...photos, ...photos].map((photo, index) => (
-                  <div key={`${photo.id}-${index}`} className="flex-shrink-0 w-72">
-                    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-0">
+          {/* News Articles */}
+          {news.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-20">
+              {news.map((article, index) => (
+                <Card 
+                  key={article.id} 
+                  className={`hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${
+                    article.size === 'large' ? 'md:col-span-2 md:row-span-2' :
+                    article.size === 'medium' ? 'md:col-span-2' : 'md:col-span-1'
+                  }`}
+                >
+                  <CardContent className="p-0 h-full">
+                    {article.image_url && (
+                      <div className="relative overflow-hidden">
                         <img 
-                          src={photo.url} 
-                          alt={photo.caption}
+                          src={article.image_url} 
+                          alt={article.title}
                           className="w-full h-48 object-cover"
                         />
-                        <div className="p-4">
-                          <p className="text-center text-gray-700 font-medium">{photo.caption}</p>
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            {article.category}
+                          </span>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <div className="text-sm text-gray-500 mb-2">{article.date}</div>
+                      {!article.image_url && (
+                        <div className="mb-3">
+                          <span className="bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            {article.category}
+                          </span>
+                        </div>
+                      )}
+                      <h3 className={`font-bold text-gray-900 mb-3 ${
+                        article.size === 'large' ? 'text-2xl' : 'text-lg'
+                      }`}>
+                        {article.title}
+                      </h3>
+                      <p className="text-gray-600">{article.excerpt}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {/* Photo Gallery */}
+          {photos.length > 0 && (
+            <>
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Photo Gallery</h3>
               </div>
-            </div>
+              
+              <div className="relative overflow-hidden">
+                <div className="flex animate-scroll-right space-x-6">
+                  {[...photos, ...photos].map((photo, index) => (
+                    <div key={`${photo.id}-${index}`} className="flex-shrink-0 w-72">
+                      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
+                        <CardContent className="p-0">
+                          <img 
+                            src={photo.url} 
+                            alt={photo.caption}
+                            className="w-full h-48 object-cover"
+                          />
+                          <div className="p-4">
+                            <p className="text-center text-gray-700 font-medium">{photo.caption}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-            {/* Gallery Button */}
-            <div className="text-center mt-8">
-              <Button 
-                className="bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 transition-all duration-300 px-8 py-3"
-                onClick={() => navigate('/gallery')}
-              >
-                View Full Gallery
-              </Button>
-            </div>
-          </>
-        )}
+              {/* Gallery Button */}
+              <div className="text-center mt-8">
+                <Button 
+                  className="bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 transition-all duration-300 px-8 py-3"
+                  onClick={() => navigate('/gallery')}
+                >
+                  View Full Gallery
+                </Button>
+              </div>
+            </>
+          )}
 
-        {news.length === 0 && photos.length === 0 && (
-          <div className="text-center text-gray-600">
-            <p>No news or photos available at the moment.</p>
-          </div>
-        )}
-      </div>
-    </section>
+          {news.length === 0 && photos.length === 0 && (
+            <div className="text-center text-gray-600">
+              <p>No news or photos available at the moment.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </SectionFadeIn>
   );
 };
 

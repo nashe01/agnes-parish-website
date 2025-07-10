@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
+import { SectionFadeIn } from './SectionFadeIn';
 
 interface Announcement {
   id: string;
@@ -56,80 +57,82 @@ const AnnouncementsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">Announcements & Events</h2>
-          <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
-        </div>
-
-        {/* Upcoming Events */}
-        {upcomingEvents.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {upcomingEvents.map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                  <CardContent className="p-6">
-                    {event.image_url && (
-                      <img 
-                        src={event.image_url} 
-                        alt={event.title}
-                        className="w-full h-48 object-cover rounded-md mb-4"
-                      />
-                    )}
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
-                    <div className="text-secondary font-semibold mb-1">{event.date}</div>
-                    <div className="text-secondary font-semibold mb-3">{event.category}</div>
-                    <p className="text-gray-600">{event.excerpt}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+    <SectionFadeIn direction="up">
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">Announcements & Events</h2>
+            <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
           </div>
-        )}
 
-        {/* Parish Announcements */}
-        {announcements.length > 0 && (
-          <>
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Parish Announcements</h3>
-            </div>
-            
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll-left space-x-6">
-                {[...announcements, ...announcements].map((announcement, index) => (
-                  <Card key={`${announcement.id}-${index}`} className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
+          {/* Upcoming Events */}
+          {upcomingEvents.length > 0 && (
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {upcomingEvents.map((event) => (
+                  <Card key={event.id} className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                     <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
-                          announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
-                          announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
-                          announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
-                          'bg-blue-100 text-blue-800'
-                        }`}>
-                          {announcement.type}
-                        </span>
-                      </div>
-                      <h4 className="text-lg font-bold text-gray-900 mb-2">{announcement.title}</h4>
-                      <div className="text-secondary font-semibold mb-3">{announcement.date_text}</div>
-                      <p className="text-gray-600 text-sm">{announcement.description}</p>
+                      {event.image_url && (
+                        <img 
+                          src={event.image_url} 
+                          alt={event.title}
+                          className="w-full h-48 object-cover rounded-md mb-4"
+                        />
+                      )}
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
+                      <div className="text-secondary font-semibold mb-1">{event.date}</div>
+                      <div className="text-secondary font-semibold mb-3">{event.category}</div>
+                      <p className="text-gray-600">{event.excerpt}</p>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             </div>
-          </>
-        )}
+          )}
 
-        {announcements.length === 0 && upcomingEvents.length === 0 && (
-          <div className="text-center text-gray-600">
-            <p>No announcements or events available at the moment.</p>
-          </div>
-        )}
-      </div>
-    </section>
+          {/* Parish Announcements */}
+          {announcements.length > 0 && (
+            <>
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Parish Announcements</h3>
+              </div>
+              
+              <div className="relative overflow-hidden">
+                <div className="flex animate-scroll-left space-x-6">
+                  {[...announcements, ...announcements].map((announcement, index) => (
+                    <Card key={`${announcement.id}-${index}`} className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex justify-between items-start mb-3">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
+                            announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
+                            announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
+                            announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {announcement.type}
+                          </span>
+                        </div>
+                        <h4 className="text-lg font-bold text-gray-900 mb-2">{announcement.title}</h4>
+                        <div className="text-secondary font-semibold mb-3">{announcement.date_text}</div>
+                        <p className="text-gray-600 text-sm">{announcement.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
+          {announcements.length === 0 && upcomingEvents.length === 0 && (
+            <div className="text-center text-gray-600">
+              <p>No announcements or events available at the moment.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </SectionFadeIn>
   );
 };
 
