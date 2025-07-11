@@ -136,7 +136,6 @@ const AnnouncementsSection = () => {
       </div>
     </section>
   );
-  );
 };
 
 export default AnnouncementsSection;

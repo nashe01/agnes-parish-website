@@ -165,7 +165,6 @@ const NewsSection = () => {
       </div>
     </section>
   );
-  );
 };
 
 export default NewsSection;
