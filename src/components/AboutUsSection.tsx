@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, User, FileText, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SectionFadeIn } from './SectionFadeIn';
 
 const AboutUsSection = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -117,25 +118,26 @@ const AboutUsSection = () => {
         </div>
 
         {/* Animated Bullet Notes */}
-        <motion.ul
-          className="mt-6 max-w-5xl mx-auto space-y-3 text-gray-900 text-base"
-          variants={listVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.li className="flex items-start gap-2" variants={itemVariants}>
-            <User className="w-5 h-5 text-sky-600 mt-1" />
-            <span>Know our spiritual leaders</span>
-          </motion.li>
-          <motion.li className="flex items-start gap-2" variants={itemVariants}>
-            <FileText className="w-5 h-5 text-sky-600 mt-1" />
-            <span>Download PDFs of our full parish history</span>
-          </motion.li>
-          <motion.li className="flex items-start gap-2" variants={itemVariants}>
-            <Users className="w-5 h-5 text-sky-600 mt-1" />
-            <span>Explore the various guilds and sections of the church</span>
-          </motion.li>
-        </motion.ul>
+        <ul className="mt-6 max-w-5xl mx-auto space-y-3 text-gray-900 text-base">
+          <SectionFadeIn direction="up" delay={0}>
+            <li className="flex items-start gap-2">
+              <User className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Know our spiritual leaders</span>
+            </li>
+          </SectionFadeIn>
+          <SectionFadeIn direction="up" delay={0.08}>
+            <li className="flex items-start gap-2">
+              <FileText className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Download PDFs of our full parish history</span>
+            </li>
+          </SectionFadeIn>
+          <SectionFadeIn direction="up" delay={0.16}>
+            <li className="flex items-start gap-2">
+              <Users className="w-5 h-5 text-sky-600 mt-1" />
+              <span>Explore the various guilds and sections of the church</span>
+            </li>
+          </SectionFadeIn>
+        </ul>
       </div>
     </section>
   );

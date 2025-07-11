@@ -57,21 +57,21 @@ const AnnouncementsSection = () => {
   };
 
   return (
-    <SectionFadeIn direction="up">
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">Announcements & Events</h2>
-            <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
-          </div>
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-4">Announcements & Events</h2>
+          <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
+        </div>
 
-          {/* Upcoming Events */}
-          {upcomingEvents.length > 0 && (
-            <div className="mb-16">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                {upcomingEvents.map((event) => (
-                  <Card key={event.id} className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+        {/* Upcoming Events */}
+        {upcomingEvents.length > 0 && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {upcomingEvents.map((event, index) => (
+                <SectionFadeIn key={event.id} direction="up" delay={index * 0.08}>
+                  <Card className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                     <CardContent className="p-6">
                       {event.image_url && (
                         <img 
@@ -86,22 +86,24 @@ const AnnouncementsSection = () => {
                       <p className="text-gray-600">{event.excerpt}</p>
                     </CardContent>
                   </Card>
-                ))}
-              </div>
+                </SectionFadeIn>
+              ))}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Parish Announcements */}
-          {announcements.length > 0 && (
-            <>
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Parish Announcements</h3>
-              </div>
-              
-              <div className="relative overflow-hidden">
-                <div className="flex animate-scroll-left space-x-6">
-                  {[...announcements, ...announcements].map((announcement, index) => (
-                    <Card key={`${announcement.id}-${index}`} className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
+        {/* Parish Announcements */}
+        {announcements.length > 0 && (
+          <>
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Parish Announcements</h3>
+            </div>
+            
+            <div className="relative overflow-hidden">
+              <div className="flex animate-scroll-left space-x-6">
+                {[...announcements, ...announcements].map((announcement, index) => (
+                  <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
+                    <Card className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
                       <CardContent className="p-6">
                         <div className="flex justify-between items-start mb-3">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -119,20 +121,21 @@ const AnnouncementsSection = () => {
                         <p className="text-gray-600 text-sm">{announcement.description}</p>
                       </CardContent>
                     </Card>
-                  ))}
-                </div>
+                  </SectionFadeIn>
+                ))}
               </div>
-            </>
-          )}
-
-          {announcements.length === 0 && upcomingEvents.length === 0 && (
-            <div className="text-center text-gray-600">
-              <p>No announcements or events available at the moment.</p>
             </div>
-          )}
-        </div>
-      </section>
-    </SectionFadeIn>
+          </>
+        )}
+
+        {announcements.length === 0 && upcomingEvents.length === 0 && (
+          <div className="text-center text-gray-600">
+            <p>No announcements or events available at the moment.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
   );
 };
 

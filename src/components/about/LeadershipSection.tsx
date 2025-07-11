@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { SectionFadeIn } from '../SectionFadeIn';
 
 const LeadershipSection = () => {
   const [typedText, setTypedText] = useState('');
@@ -42,15 +43,17 @@ const LeadershipSection = () => {
           <div className="w-full max-w-xs overflow-hidden">
             <div className="flex animate-scroll-left-50">
               {[...leadership, ...leadership].map((p, i) => (
-                <div key={i} className="flex-shrink-0 w-1/2 px-0.5">
-                  <div className="text-center">
-                    <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden shadow-lg">
-                      <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                <SectionFadeIn key={i} direction="up" delay={i * 0.08}>
+                  <div className="flex-shrink-0 w-1/2 px-0.5">
+                    <div className="text-center">
+                      <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden shadow-lg">
+                        <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-gray-900">{p.title}</h3>
+                      <p className="text-xs text-gray-600">{p.name}</p>
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900">{p.title}</h3>
-                    <p className="text-xs text-gray-600">{p.name}</p>
                   </div>
-                </div>
+                </SectionFadeIn>
               ))}
             </div>
           </div>

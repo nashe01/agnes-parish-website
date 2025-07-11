@@ -59,18 +59,17 @@ const MinistriesSection = () => {
   }
 
   return (
-    <SectionFadeIn direction="up">
-      <section id="ministries" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-secondary mb-4">Ministries & Guilds</h2>
-            <p className="text-xl text-gray-600">Discover opportunities to serve and grow in faith</p>
-          </div>
+    <section id="ministries" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-secondary mb-4">Ministries & Guilds</h2>
+          <p className="text-xl text-gray-600">Discover opportunities to serve and grow in faith</p>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {ministries.map((ministry, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {ministries.map((ministry, index) => (
+            <SectionFadeIn key={ministry.id} direction="up" delay={index * 0.08}>
               <div 
-                key={ministry.id}
                 className="relative h-64 cursor-pointer"
                 style={{ perspective: '1000px' }}
                 onMouseEnter={() => handleCardHover(index)}
@@ -128,11 +127,11 @@ const MinistriesSection = () => {
                   </Card>
                 </div>
               </div>
-            ))}
-          </div>
+            </SectionFadeIn>
+          ))}
         </div>
-      </section>
-    </SectionFadeIn>
+      </div>
+    </section>
   );
 };
 
