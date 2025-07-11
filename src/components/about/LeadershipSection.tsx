@@ -17,47 +17,122 @@ const LeadershipSection = () => {
   }, []);
 
   const leadership = [
-    { name: 'Fr. Michael Rodriguez', title: 'Pastor',            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Deacon John Smith',     title: 'Permanent Deacon',  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Sr. Mary Catherine',    title: 'Parish Sister',     image: 'https://images.unsplash.com/photo-1494790108755-2616c6209697?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Mr. David Wilson',      title: 'Music Director',    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Mrs. Sarah Johnson',    title: 'Youth Coordinator', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Mr. Thomas Brown',      title: 'Facilities Manager', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Mrs. Lisa Martinez',    title: 'Parish Secretary',  image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Fr. James O\'Connor',   title: 'Associate Pastor',  image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Fr. Michael Rodriguez', title: 'Pastor', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Deacon John Smith', title: 'Permanent Deacon', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Sr. Mary Catherine', title: 'Parish Sister', image: 'https://images.unsplash.com/photo-1494790108755-2616c6209697?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Mr. David Wilson', title: 'Music Director', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Mrs. Sarah Johnson', title: 'Youth Coordinator', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Mr. Thomas Brown', title: 'Facilities Manager', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Mrs. Lisa Martinez', title: 'Parish Secretary', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Fr. James O\'Connor', title: 'Associate Pastor', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80' },
   ];
 
   return (
-    <section className="py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
-          {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
-        </h2>
-        
-        <p className="text-gray-600 text-lg text-center mb-12 max-w-3xl mx-auto">
-          Meet the dedicated clergy and staff who guide our parish community in faith, worship, and service.
-        </p>
+    <section className="py-20 bg-gradient-to-br from-sky-50 via-white to-blue-50 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-sky-200 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-sky-100 rounded-full blur-3xl"></div>
+      </div>
 
-        {/* very narrow centered container */}
-        <div className="flex justify-center">
-          <div className="w-full max-w-xs overflow-hidden">
-            <div className="flex animate-scroll-left-50">
-              {[...leadership, ...leadership].map((p, i) => (
-                <SectionFadeIn key={i} direction="up" delay={i * 0.08}>
-                  <div className="flex-shrink-0 w-1/2 px-0.5">
-                    <div className="text-center">
-                      <div className="w-20 h-20 mx-auto mb-2 rounded-full overflow-hidden shadow-lg">
-                        <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-                      </div>
-                      <h3 className="text-sm font-semibold text-gray-900">{p.title}</h3>
-                      <p className="text-xs text-gray-600">{p.name}</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Hero Header */}
+        <SectionFadeIn direction="up" delay={0}>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-sky-600 to-blue-800 bg-clip-text text-transparent">
+              {typedText}<span className="border-r-2 border-sky-800 ml-1 animate-pulse" />
+            </h2>
+            
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Meet the dedicated clergy and staff who guide our parish community in faith, worship, and service.
+            </p>
+          </div>
+        </SectionFadeIn>
+
+        {/* Hero Images Grid */}
+        <div className="relative">
+          {/* Main large image (Pastor) */}
+          <SectionFadeIn direction="up" delay={0.2}>
+            <div className="flex justify-center mb-12">
+              <div className="relative group">
+                <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-white transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-3xl">
+                  <img 
+                    src={leadership[0].image} 
+                    alt={leadership[0].name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg px-4 py-2 text-center min-w-[200px]">
+                  <h3 className="font-bold text-gray-900 text-lg">{leadership[0].title}</h3>
+                  <p className="text-gray-600">{leadership[0].name}</p>
+                </div>
+              </div>
+            </div>
+          </SectionFadeIn>
+
+          {/* Secondary row - 3 images */}
+          <SectionFadeIn direction="up" delay={0.4}>
+            <div className="flex justify-center mb-8">
+              <div className="flex space-x-8 md:space-x-12">
+                {leadership.slice(1, 4).map((leader, index) => (
+                  <div key={leader.name} className="relative group">
+                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl ring-4 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl">
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-md px-3 py-1 text-center min-w-[140px]">
+                      <h4 className="font-semibold text-gray-900 text-sm">{leader.title}</h4>
+                      <p className="text-gray-600 text-xs">{leader.name}</p>
                     </div>
                   </div>
-                </SectionFadeIn>
-              ))}
+                ))}
+              </div>
+            </div>
+          </SectionFadeIn>
+
+          {/* Third row - 4 images */}
+          <SectionFadeIn direction="up" delay={0.6}>
+            <div className="flex justify-center">
+              <div className="flex space-x-6 md:space-x-8">
+                {leadership.slice(4, 8).map((leader, index) => (
+                  <div key={leader.name} className="relative group">
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-sm px-2 py-1 text-center min-w-[120px]">
+                      <h4 className="font-medium text-gray-900 text-xs">{leader.title}</h4>
+                      <p className="text-gray-600 text-xs">{leader.name}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SectionFadeIn>
+        </div>
+
+        {/* Call to Action */}
+        <SectionFadeIn direction="up" delay={0.8}>
+          <div className="text-center mt-16">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Join Our Community</h3>
+              <p className="text-gray-700 mb-6">
+                Our spiritual leaders are here to guide you on your faith journey. 
+                Reach out to any of our clergy or staff members for support, guidance, or to learn more about our parish.
+              </p>
+              <button className="bg-gradient-to-r from-sky-600 to-blue-700 text-white px-8 py-3 rounded-full font-semibold hover:from-sky-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Contact Our Team
+              </button>
             </div>
           </div>
-        </div>
+        </SectionFadeIn>
       </div>
     </section>
   );
