@@ -29,7 +29,7 @@ const LeadershipSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-sky-50 via-white to-blue-50 relative overflow-hidden">
+    <section className="py-12 bg-gradient-to-br from-sky-50 via-white to-blue-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 bg-sky-200 rounded-full blur-3xl"></div>
@@ -68,13 +68,13 @@ const LeadershipSection = () => {
 
           {/* Right Column - Leadership Grid */}
           <SectionFadeIn direction="right" delay={0.2}>
-            <div className="flex flex-col items-end">
-              {/* Main large images row - 2 images */}
-              <div className="flex justify-end mb-8">
+            <div className="flex flex-col items-center w-full">
+              {/* Row 1: 2 leaders */}
+              <div className="flex justify-center mb-4 w-full">
                 <div className="flex space-x-6 md:space-x-8">
                   {leadership.slice(0, 2).map((leader, index) => (
                     <div key={leader.name} className="relative group">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                         <img 
                           src={leader.image} 
                           alt={leader.name} 
@@ -90,12 +90,12 @@ const LeadershipSection = () => {
                 </div>
               </div>
 
-              {/* Secondary row - 3 images */}
-              <div className="flex justify-end mb-8">
+              {/* Row 2: 3 leaders */}
+              <div className="flex justify-center mb-4 w-full">
                 <div className="flex space-x-6 md:space-x-8">
                   {leadership.slice(2, 5).map((leader, index) => (
                     <div key={leader.name} className="relative group">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                         <img 
                           src={leader.image} 
                           alt={leader.name} 
@@ -111,12 +111,12 @@ const LeadershipSection = () => {
                 </div>
               </div>
 
-              {/* Third row - 5 images */}
-              <div className="flex justify-end">
+              {/* Row 3: 4 leaders */}
+              <div className="flex justify-center w-full">
                 <div className="flex space-x-6 md:space-x-8">
-                  {leadership.slice(5, 10).map((leader, index) => (
+                  {leadership.slice(5, 9).map((leader, index) => (
                     <div key={leader.name} className="relative group">
-                      <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                         <img 
                           src={leader.image} 
                           alt={leader.name} 
