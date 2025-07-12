@@ -17,14 +17,14 @@ const LeadershipSection = () => {
   }, []);
 
   const leadership = [
-    { name: 'Fr. Michael Rodriguez', title: 'Pastor', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Fr. M Rodriguez', title: 'Parish Priest', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Fr. James O\'Connor', title: 'Deputy Priest', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80' },
     { name: 'Deacon John Smith', title: 'Permanent Deacon', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80' },
     { name: 'Sr. Mary Catherine', title: 'Parish Sister', image: 'https://images.unsplash.com/photo-1494790108755-2616c6209697?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mr. David Wilson', title: 'Music Director', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mrs. Sarah Johnson', title: 'Youth Coordinator', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mr. Thomas Brown', title: 'Facilities Manager', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mrs. Lisa Martinez', title: 'Parish Secretary', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Fr. James O\'Connor', title: 'Associate Pastor', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80' },
   ];
 
   return (
@@ -52,21 +52,25 @@ const LeadershipSection = () => {
 
         {/* Hero Images Grid */}
         <div className="relative">
-          {/* Main large image (Pastor) */}
+          {/* Main large images row - 2 images */}
           <SectionFadeIn direction="up" delay={0.2}>
-            <div className="flex justify-center mb-12">
-              <div className="relative group">
-                <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-white transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-3xl">
-                  <img 
-                    src={leadership[0].image} 
-                    alt={leadership[0].name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg px-4 py-2 text-center min-w-[200px]">
-                  <h3 className="font-bold text-gray-900 text-lg">{leadership[0].title}</h3>
-                  <p className="text-gray-600">{leadership[0].name}</p>
-                </div>
+            <div className="flex justify-center mb-8">
+              <div className="flex space-x-6 md:space-x-8">
+                {leadership.slice(0, 2).map((leader, index) => (
+                  <div key={leader.name} className="relative group">
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-sm px-2 py-1 text-center min-w-[120px]">
+                      <h4 className="font-medium text-gray-900 text-xs">{leader.title}</h4>
+                      <p className="text-gray-600 text-xs">{leader.name}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </SectionFadeIn>
@@ -74,18 +78,18 @@ const LeadershipSection = () => {
           {/* Secondary row - 3 images */}
           <SectionFadeIn direction="up" delay={0.4}>
             <div className="flex justify-center mb-8">
-              <div className="flex space-x-8 md:space-x-12">
-                {leadership.slice(1, 4).map((leader, index) => (
+              <div className="flex space-x-6 md:space-x-8">
+                {leadership.slice(2, 5).map((leader, index) => (
                   <div key={leader.name} className="relative group">
-                    <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl ring-4 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl">
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                       <img 
                         src={leader.image} 
                         alt={leader.name} 
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-md px-3 py-1 text-center min-w-[140px]">
-                      <h4 className="font-semibold text-gray-900 text-sm">{leader.title}</h4>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-sm px-2 py-1 text-center min-w-[120px]">
+                      <h4 className="font-medium text-gray-900 text-xs">{leader.title}</h4>
                       <p className="text-gray-600 text-xs">{leader.name}</p>
                     </div>
                   </div>
@@ -98,7 +102,7 @@ const LeadershipSection = () => {
           <SectionFadeIn direction="up" delay={0.6}>
             <div className="flex justify-center">
               <div className="flex space-x-6 md:space-x-8">
-                {leadership.slice(4, 8).map((leader, index) => (
+                {leadership.slice(5, 9).map((leader, index) => (
                   <div key={leader.name} className="relative group">
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                       <img 
