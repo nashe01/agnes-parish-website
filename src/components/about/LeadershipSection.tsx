@@ -25,6 +25,7 @@ const LeadershipSection = () => {
     { name: 'Mrs. Sarah Johnson', title: 'Youth Coordinator', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mr. Thomas Brown', title: 'Facilities Manager', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80' },
     { name: 'Mrs. Lisa Martinez', title: 'Parish Secretary', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80' },
+    { name: 'Mr. Robert Garcia', title: 'Maintenance Staff', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
   ];
 
   return (
@@ -98,11 +99,11 @@ const LeadershipSection = () => {
             </div>
           </SectionFadeIn>
 
-          {/* Third row - 4 images */}
+          {/* Third row - 5 images */}
           <SectionFadeIn direction="up" delay={0.6}>
             <div className="flex justify-center">
               <div className="flex space-x-6 md:space-x-8">
-                {leadership.slice(5, 9).map((leader, index) => (
+                {leadership.slice(5, 10).map((leader, index) => (
                   <div key={leader.name} className="relative group">
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-lg ring-3 ring-white transform transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl">
                       <img 
