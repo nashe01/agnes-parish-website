@@ -224,6 +224,30 @@ For support or questions:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## 🔍 Code Review & Branch Protection
+
+To ensure code quality and collaboration, this repository uses GitHub's branch protection and review process:
+
+1. All changes must go through a pull request (PR).
+2. At least one reviewer must approve the PR before it can be merged.
+3. Direct pushes to the `main` branch are not allowed.
+
+### How to Set Up Required Reviews (for repository admins)
+1. Go to your repository on GitHub.
+2. Click on the **Settings** tab.
+3. In the left sidebar, click **Branches**.
+4. Under "Branch protection rules," click **Add rule**.
+5. For "Branch name pattern," enter `main` (or your default branch name).
+6. Check **Require a pull request before merging**.
+7. Check **Require approvals** and set the number of required approvals (e.g., 1 or 2).
+8. (Optional) Check **Dismiss stale pull request approvals when new commits are pushed**.
+9. (Optional) Check **Require status checks to pass before merging** if you use CI/CD.
+10. Click **Create** or **Save changes**.
+
+This ensures that all code is reviewed and tested before being merged into the main codebase.
+
+---
+
 ## 🙏 Acknowledgments
 
 - [shadcn/ui](https://ui.shadcn.com/) for the component library
