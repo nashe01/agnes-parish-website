@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import Header from '@/components/Header';
 
 interface GalleryPhoto {
   id: string;
@@ -45,21 +46,23 @@ const Gallery = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center mb-8">
-          <Button
-            variant="outline"
-            onClick={() => navigate('/')}
-            className="mr-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Button>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
-            Parish Photo Gallery
-          </h1>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex items-center mb-8">
+            <Button
+              variant="outline"
+              onClick={() => navigate('/')}
+              className="mr-4"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Home
+            </Button>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
+              Parish Photo Gallery
+            </h1>
+          </div>
 
         {photos.length === 0 ? (
           <div className="text-center text-gray-600">
@@ -86,6 +89,7 @@ const Gallery = () => {
             ))}
           </div>
         )}
+        </div>
       </div>
     </div>
   );
