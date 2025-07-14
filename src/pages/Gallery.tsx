@@ -110,14 +110,7 @@ const Gallery = () => {
           {/* Header Section */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
             <div className="flex items-center">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/')}
-                className="mr-4"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
-              </Button>
+              {/* Removed Back to Home Button */}
               <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent">
                 Parish Photo Gallery
               </h1>

@@ -66,7 +66,7 @@ describe('Gallery Component', () => {
     
     await waitFor(() => {
       expect(screen.getByText('Parish Photo Gallery')).toBeInTheDocument()
-      expect(screen.getByText('Back to Home')).toBeInTheDocument()
+      // Removed: expect(screen.getByText('Back to Home')).toBeInTheDocument()
     })
   })
 
@@ -110,16 +110,16 @@ describe('Gallery Component', () => {
     })
   })
 
-  it('navigates back to home when back button is clicked', async () => {
-    renderGallery()
-    
-    await waitFor(() => {
-      const backButton = screen.getByText('Back to Home')
-      fireEvent.click(backButton)
-      
-      expect(mockNavigate).toHaveBeenCalledWith('/')
-    })
-  })
+  // Removed: it('navigates back to home when back button is clicked', async () => {
+  //   renderGallery()
+  //   
+  //   await waitFor(() => {
+  //     const backButton = screen.getByText('Back to Home')
+  //     fireEvent.click(backButton)
+  //     
+  //     expect(mockNavigate).toHaveBeenCalledWith('/')
+  //   })
+  // })
 
   it('shows clear search button when search has results', async () => {
     renderGallery()
