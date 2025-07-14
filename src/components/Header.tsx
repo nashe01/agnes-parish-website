@@ -15,13 +15,18 @@ const Header = () => {
     { name: 'Services', href: '#services' },
     { name: 'News', href: '#news' },
     { name: 'About Us', href: '#about' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('/')) {
+      navigate(href);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMenuOpen(false);
   };

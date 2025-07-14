@@ -1,8 +1,6 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { SectionFadeIn } from './SectionFadeIn';
 
@@ -16,20 +14,11 @@ interface NewsArticle {
   size: string;
 }
 
-interface GalleryPhoto {
-  id: string;
-  url: string;
-  caption: string;
-}
-
 const NewsSection = () => {
-  const navigate = useNavigate();
   const [news, setNews] = useState<NewsArticle[]>([]);
-  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   
   useEffect(() => {
     fetchNews();
-    fetchPhotos();
   }, []);
 
   const fetchNews = async () => {
@@ -45,18 +34,7 @@ const NewsSection = () => {
     }
   };
 
-  const fetchPhotos = async () => {
-    const { data } = await supabase
-      .from('gallery_photos')
-      .select('*')
-      .eq('is_active', true)
-      .order('display_order')
-      .limit(6);
-    
-    if (data) {
-      setPhotos(data);
-    }
-  };
+
 
   return (
     <section id="news" className="py-20 bg-white">
@@ -115,51 +93,9 @@ const NewsSection = () => {
           </div>
         )}
 
-        {/* Photo Gallery */}
-        {photos.length > 0 && (
-          <>
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Photo Gallery</h3>
-            </div>
-            
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll-right space-x-6">
-                {[...photos, ...photos].map((photo, index) => (
-                  <SectionFadeIn key={`${photo.id}-${index}`} direction="up" delay={index * 0.08}>
-                    <div className="flex-shrink-0 w-72">
-                      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
-                        <CardContent className="p-0">
-                          <img 
-                            src={photo.url} 
-                            alt={photo.caption}
-                            className="w-full h-48 object-cover"
-                          />
-                          <div className="p-4">
-                            <p className="text-center text-gray-700 font-medium">{photo.caption}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </SectionFadeIn>
-                ))}
-              </div>
-            </div>
-
-            {/* Gallery Button */}
-            <div className="text-center mt-8">
-              <Button 
-                className="bg-gradient-to-r from-sky-500 to-sky-800 text-white hover:from-sky-600 hover:to-sky-900 transition-all duration-300 px-8 py-3"
-                onClick={() => navigate('/gallery')}
-              >
-                View Full Gallery
-              </Button>
-            </div>
-          </>
-        )}
-
-        {news.length === 0 && photos.length === 0 && (
+        {news.length === 0 && (
           <div className="text-center text-gray-600">
-            <p>No news or photos available at the moment.</p>
+            <p>No news available at the moment.</p>
           </div>
         )}
       </div>
