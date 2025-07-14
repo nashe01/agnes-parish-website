@@ -1,3 +1,4 @@
+
 # St. Agnes Catholic Parish Website
 
 A modern, responsive website for St. Agnes Catholic Parish built with React, TypeScript, and Tailwind CSS.
@@ -256,6 +257,4 @@ This ensures that all code is reviewed and tested before being merged into the m
 - [Vite](https://vitejs.dev/) for build tooling
 - [React](https://reactjs.org/) for the framework
 
----
 
-**Built with ❤️ for St. Agnes Catholic Parish**
