@@ -103,22 +103,24 @@ const AnnouncementsSection = () => {
               <div className="flex animate-scroll-left space-x-6">
                 {[...announcements, ...announcements].map((announcement, index) => (
                   <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
-                    <Card className="flex-shrink-0 w-48 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-1">
-                        <div className="flex justify-between items-start mb-1">
-                          <span className={`px-2 py-0 rounded-full text-[10px] font-semibold ${
-                            announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
-                            announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
-                            announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
-                            announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
-                            'bg-blue-100 text-blue-800'
-                          }`}>
-                            {announcement.type}
-                          </span>
+                    <Card className="flex-shrink-0 w-48 h-40 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-1 h-full flex flex-col justify-between">
+                        <div>
+                          <div className="flex justify-between items-start mb-1">
+                            <span className={`px-2 py-0 rounded-full text-[10px] font-semibold ${
+                              announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
+                              announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
+                              announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
+                              announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
+                              'bg-blue-100 text-blue-800'
+                            }`}>
+                              {announcement.type}
+                            </span>
+                          </div>
+                          <h4 className="text-base font-semibold text-gray-900 mb-0.5 leading-snug truncate">{announcement.title}</h4>
+                          <div className="text-secondary font-medium mb-1 text-xs leading-tight truncate">{announcement.date_text}</div>
+                          <p className="text-gray-600 text-xs leading-tight m-0 line-clamp-3">{announcement.description}</p>
                         </div>
-                        <h4 className="text-base font-semibold text-gray-900 mb-0.5 leading-snug">{announcement.title}</h4>
-                        <div className="text-secondary font-medium mb-1 text-xs leading-tight">{announcement.date_text}</div>
-                        <p className="text-gray-600 text-xs leading-tight m-0">{announcement.description}</p>
                       </CardContent>
                     </Card>
                   </SectionFadeIn>
