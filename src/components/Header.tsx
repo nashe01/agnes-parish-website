@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Menu, X, User, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -23,9 +24,18 @@ const Header = () => {
     if (href.startsWith('/')) {
       navigate(href);
     } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (location.pathname !== '/') {
+        // If not on main page, navigate to main page with hash
+        navigate('/' + href);
+      } else {
+        // Already on main page, scroll to section
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // If not found, update hash to trigger scroll on load
+          window.location.hash = href;
+        }
       }
     }
     setIsMenuOpen(false);
