@@ -85,7 +85,7 @@ const AnnouncementsSection = () => {
                       </div>
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                        <div className="text-white text-xs mb-2 text-center w-full truncate">{event.date}</div>
+                        <div className="text-sky-400 text-xs mb-2 text-center w-full truncate">{event.date}</div>
                         <p className="text-white text-sm text-center line-clamp-4 w-full">{event.excerpt}</p>
                       </div>
                     </CardContent>
