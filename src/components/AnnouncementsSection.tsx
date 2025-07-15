@@ -64,6 +64,34 @@ const AnnouncementsSection = () => {
           <p className="text-xl text-gray-600">Stay updated with parish activities and upcoming events</p>
         </div>
 
+        {/* Upcoming Events */}
+        {upcomingEvents.length > 0 && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-800 bg-clip-text text-transparent mb-8 text-center">Upcoming Events</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {upcomingEvents.map((event, index) => (
+                <SectionFadeIn key={event.id} direction="up" delay={index * 0.08}>
+                  <Card className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <CardContent className="p-6">
+                      {event.image_url && (
+                        <img 
+                          src={event.image_url} 
+                          alt={event.title}
+                          className="w-full h-32 object-cover rounded-md mb-4"
+                        />
+                      )}
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
+                      <div className="text-secondary font-semibold mb-1">{event.date}</div>
+                      <div className="text-secondary font-semibold mb-3">{event.category}</div>
+                      <p className="text-gray-600">{event.excerpt}</p>
+                    </CardContent>
+                  </Card>
+                </SectionFadeIn>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Parish Announcements */}
         {announcements.length > 0 && (
           <>
