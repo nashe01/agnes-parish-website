@@ -77,7 +77,7 @@ const AnnouncementsSection = () => {
                         <img 
                           src={event.image_url} 
                           alt={event.title}
-                          className="w-full h-48 object-cover rounded-md mb-4"
+                          className="w-full h-32 object-cover rounded-md mb-4"
                         />
                       )}
                       <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
@@ -103,8 +103,8 @@ const AnnouncementsSection = () => {
               <div className="flex animate-scroll-left space-x-6">
                 {[...announcements, ...announcements].map((announcement, index) => (
                   <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
-                    <Card className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-6">
+                    <Card className="flex-shrink-0 w-64 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-3">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                             announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
