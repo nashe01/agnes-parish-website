@@ -80,13 +80,12 @@ const AnnouncementsSection = () => {
                           className="w-full h-40 object-cover rounded-md"
                         />
                       )}
-                      <div className="absolute bottom-2 left-2 bg-white bg-opacity-80 text-secondary font-semibold text-sm px-3 py-1 rounded shadow">
-                        {event.date}
+                      <div className="w-full px-4 py-2 bg-white bg-opacity-90 absolute bottom-0 left-0 rounded-b-md">
+                        <h4 className="text-base font-bold text-gray-900 truncate m-0">{event.title}</h4>
                       </div>
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                        <h4 className="text-lg font-bold text-white mb-2 text-center truncate w-full">{event.title}</h4>
-                        <div className="text-white text-xs mb-2 text-center w-full truncate">{event.category}</div>
+                        <div className="text-white text-xs mb-2 text-center w-full truncate">{event.date}</div>
                         <p className="text-white text-sm text-center line-clamp-4 w-full">{event.excerpt}</p>
                       </div>
                     </CardContent>
