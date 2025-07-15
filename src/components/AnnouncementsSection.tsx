@@ -77,7 +77,7 @@ const AnnouncementsSection = () => {
                         <img 
                           src={event.image_url} 
                           alt={event.title}
-                          className="w-full h-40 object-cover rounded-md"
+                          className="w-full h-52 object-cover rounded-md"
                         />
                       )}
                       <div className="w-full px-4 py-2 bg-white bg-opacity-90 absolute bottom-0 left-0 rounded-b-md">
