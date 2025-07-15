@@ -80,7 +80,7 @@ const AnnouncementsSection = () => {
                           className="w-full h-52 object-cover rounded-md"
                         />
                       )}
-                      <div className="w-full px-4 py-2 bg-white bg-opacity-90 absolute bottom-0 left-0 rounded-b-md">
+                      <div className="w-full px-4 py-2 bg-white bg-opacity-90 absolute left-0 bottom-0 mb-3 rounded-md">
                         <h4 className="text-base font-bold text-gray-900 truncate m-0">{event.title}</h4>
                       </div>
                       {/* Overlay on hover */}
