@@ -103,10 +103,10 @@ const AnnouncementsSection = () => {
               <div className="flex animate-scroll-left space-x-6">
                 {[...announcements, ...announcements].map((announcement, index) => (
                   <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
-                    <Card className="flex-shrink-0 w-64 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-3">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    <Card className="flex-shrink-0 w-48 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-2">
+                        <div className="flex justify-between items-start mb-2">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
                             announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
                             announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
                             announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
@@ -116,9 +116,9 @@ const AnnouncementsSection = () => {
                             {announcement.type}
                           </span>
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900 mb-2">{announcement.title}</h4>
-                        <div className="text-secondary font-semibold mb-3">{announcement.date_text}</div>
-                        <p className="text-gray-600 text-sm">{announcement.description}</p>
+                        <h4 className="text-base font-semibold text-gray-900 mb-1">{announcement.title}</h4>
+                        <div className="text-secondary font-medium mb-2 text-xs">{announcement.date_text}</div>
+                        <p className="text-gray-600 text-xs leading-tight">{announcement.description}</p>
                       </CardContent>
                     </Card>
                   </SectionFadeIn>
