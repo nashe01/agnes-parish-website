@@ -78,7 +78,7 @@ const AnnouncementsSection = () => {
                           <img 
                             src={event.image_url} 
                             alt={event.title}
-                            className="w-full h-24 object-cover rounded-md mb-2"
+                            className="w-full h-40 object-cover rounded-md mb-2"
                           />
                         )}
                         <h4 className="text-lg font-bold text-gray-900 mb-1 truncate">{event.title}</h4>
