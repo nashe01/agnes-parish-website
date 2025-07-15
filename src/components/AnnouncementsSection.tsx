@@ -104,9 +104,9 @@ const AnnouncementsSection = () => {
                 {[...announcements, ...announcements].map((announcement, index) => (
                   <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
                     <Card className="flex-shrink-0 w-48 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-2">
-                        <div className="flex justify-between items-start mb-2">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                      <CardContent className="p-1">
+                        <div className="flex justify-between items-start mb-1">
+                          <span className={`px-2 py-0 rounded-full text-[10px] font-semibold ${
                             announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
                             announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
                             announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
@@ -116,9 +116,9 @@ const AnnouncementsSection = () => {
                             {announcement.type}
                           </span>
                         </div>
-                        <h4 className="text-base font-semibold text-gray-900 mb-1">{announcement.title}</h4>
-                        <div className="text-secondary font-medium mb-2 text-xs">{announcement.date_text}</div>
-                        <p className="text-gray-600 text-xs leading-tight">{announcement.description}</p>
+                        <h4 className="text-base font-semibold text-gray-900 mb-0.5 leading-snug">{announcement.title}</h4>
+                        <div className="text-secondary font-medium mb-1 text-xs leading-tight">{announcement.date_text}</div>
+                        <p className="text-gray-600 text-xs leading-tight m-0">{announcement.description}</p>
                       </CardContent>
                     </Card>
                   </SectionFadeIn>
