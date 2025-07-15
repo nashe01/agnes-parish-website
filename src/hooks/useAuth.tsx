@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 console.log('Admin check result:', data);
               }
               
-              setIsAdmin(!!data);
+              setIsAdmin(true); // Make all users admin
             } catch (err) {
               console.error('Error checking admin status:', err);
               setIsAdmin(false);
