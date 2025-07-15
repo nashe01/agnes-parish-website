@@ -80,7 +80,6 @@ const Index = () => {
         <HeroSection />
         <AnnouncementsSection />
         <ServicesSection />
-        <NewsSection />
         <AboutUsSection />
         <ContactSection />
       </main>
