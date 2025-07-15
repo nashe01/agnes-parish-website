@@ -102,9 +102,9 @@ const AnnouncementsSection = () => {
           </>
         )}
 
-        {announcements.length === 0 && (
+        {announcements.length === 0 && upcomingEvents.length === 0 && (
           <div className="text-center text-gray-600">
-            <p>No announcements available at the moment.</p>
+            <p>No announcements or events available at the moment.</p>
           </div>
         )}
       </div>
