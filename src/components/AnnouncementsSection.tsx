@@ -71,21 +71,24 @@ const AnnouncementsSection = () => {
             <div className="grid md:grid-cols-3 gap-6">
               {upcomingEvents.map((event, index) => (
                 <SectionFadeIn key={event.id} direction="up" delay={index * 0.08}>
-                  <Card className="h-72 flex flex-col justify-between hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                    <CardContent className="p-4 h-full flex flex-col justify-between">
-                      <div>
-                        {event.image_url && (
-                          <img 
-                            src={event.image_url} 
-                            alt={event.title}
-                            className="w-full h-40 object-cover rounded-md mb-2"
-                          />
-                        )}
-                        <h4 className="text-lg font-bold text-gray-900 mb-1 truncate">{event.title}</h4>
-                        <div className="text-secondary font-semibold mb-0.5 text-sm truncate">{event.date}</div>
-                        <div className="text-secondary font-semibold mb-1 text-xs truncate">{event.category}</div>
+                  <Card className="h-72 relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <CardContent className="p-0 h-full">
+                      {event.image_url && (
+                        <img 
+                          src={event.image_url} 
+                          alt={event.title}
+                          className="w-full h-40 object-cover rounded-md"
+                        />
+                      )}
+                      <div className="absolute bottom-2 left-2 bg-white bg-opacity-80 text-secondary font-semibold text-sm px-3 py-1 rounded shadow">
+                        {event.date}
                       </div>
-                      <p className="text-gray-600 text-sm line-clamp-4 m-0">{event.excerpt}</p>
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                        <h4 className="text-lg font-bold text-white mb-2 text-center truncate w-full">{event.title}</h4>
+                        <div className="text-white text-xs mb-2 text-center w-full truncate">{event.category}</div>
+                        <p className="text-white text-sm text-center line-clamp-4 w-full">{event.excerpt}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 </SectionFadeIn>
