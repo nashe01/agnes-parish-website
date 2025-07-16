@@ -71,19 +71,23 @@ const AnnouncementsSection = () => {
             <div className="grid md:grid-cols-3 gap-6">
               {upcomingEvents.map((event, index) => (
                 <SectionFadeIn key={event.id} direction="up" delay={index * 0.08}>
-                  <Card className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                    <CardContent className="p-6">
+                  <Card className="h-72 relative overflow-hidden group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                    <CardContent className="p-0 h-full">
                       {event.image_url && (
                         <img 
                           src={event.image_url} 
                           alt={event.title}
-                          className="w-full h-48 object-cover rounded-md mb-4"
+                          className="w-full h-52 object-cover rounded-md"
                         />
                       )}
-                      <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
-                      <div className="text-secondary font-semibold mb-1">{event.date}</div>
-                      <div className="text-secondary font-semibold mb-3">{event.category}</div>
-                      <p className="text-gray-600">{event.excerpt}</p>
+                      <div className="w-full px-4 py-2 bg-white bg-opacity-90 absolute left-0 bottom-0 mb-3 rounded-md">
+                        <h4 className="text-base font-bold text-gray-900 truncate m-0">{event.title}</h4>
+                      </div>
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                        <div className="text-sky-400 text-base font-bold mb-2 text-center w-full truncate">{event.date}</div>
+                        <p className="text-white text-sm text-center line-clamp-4 w-full">{event.excerpt}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 </SectionFadeIn>
@@ -103,22 +107,24 @@ const AnnouncementsSection = () => {
               <div className="flex animate-scroll-left space-x-6">
                 {[...announcements, ...announcements].map((announcement, index) => (
                   <SectionFadeIn key={`${announcement.id}-${index}`} direction="up" delay={index * 0.08}>
-                    <Card className="flex-shrink-0 w-80 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-6">
-                        <div className="flex justify-between items-start mb-3">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
-                            announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
-                            announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
-                            announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
-                            'bg-blue-100 text-blue-800'
-                          }`}>
-                            {announcement.type}
-                          </span>
+                    <Card className="flex-shrink-0 w-48 h-40 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-1 h-full flex flex-col justify-between">
+                        <div>
+                          <div className="flex justify-between items-start mb-1">
+                            <span className={`px-2 py-0 rounded-full text-[10px] font-semibold ${
+                              announcement.type === 'Event' ? 'bg-skyblue-100 text-skyblue-800' :
+                              announcement.type === 'Ministry' ? 'bg-green-100 text-green-800' :
+                              announcement.type === 'Sacrament' ? 'bg-purple-100 text-purple-800' :
+                              announcement.type === 'Community' ? 'bg-orange-100 text-orange-800' :
+                              'bg-blue-100 text-blue-800'
+                            }`}>
+                              {announcement.type}
+                            </span>
+                          </div>
+                          <h4 className="text-base font-semibold text-gray-900 mb-0.5 leading-snug truncate">{announcement.title}</h4>
+                          <div className="text-secondary font-medium mb-1 text-xs leading-tight truncate">{announcement.date_text}</div>
+                          <p className="text-gray-600 text-xs leading-tight m-0 line-clamp-3">{announcement.description}</p>
                         </div>
-                        <h4 className="text-lg font-bold text-gray-900 mb-2">{announcement.title}</h4>
-                        <div className="text-secondary font-semibold mb-3">{announcement.date_text}</div>
-                        <p className="text-gray-600 text-sm">{announcement.description}</p>
                       </CardContent>
                     </Card>
                   </SectionFadeIn>
