@@ -29,6 +29,29 @@ const AboutUsSection = () => {
     }
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCard((prev) => (prev + 1) % cardContent.length);
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Motion variants for staggered list
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,29 +64,46 @@ const AboutUsSection = () => {
         </div>
 
         {/* Crossfade Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {cardContent.map((card, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="relative max-w-5xl mx-auto h-[460px] overflow-hidden mb-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentCard}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+              className="absolute inset-0 grid md:grid-cols-2"
+            >
               {/* Image Section */}
-              <div className="h-64">
+              <div className="h-[460px]">
                 <img
-                  src={card.image}
-                  alt={card.title}
+                  src={cardContent[currentCard].image}
+                  alt={cardContent[currentCard].title}
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Text Section */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-4 text-sky-500">
-                  {card.title}
-                </h3>
-                <p className="text-gray-700 text-base leading-relaxed whitespace-pre-line">
-                  {card.content}
-                </p>
+              <div className="p-8 flex flex-col justify-start bg-white h-[460px]">
+                <motion.h3
+                  className="text-3xl font-bold mb-4 text-sky-500"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.2 }}
+                >
+                  {cardContent[currentCard].title}
+                </motion.h3>
+                <motion.p
+                  className="text-gray-700 text-lg leading-relaxed whitespace-pre-line"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5, delay: 0.3 }}
+                >
+                  {cardContent[currentCard].content}
+                </motion.p>
               </div>
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Learn More Button */}
