@@ -68,7 +68,7 @@ const LeadershipSection = () => {
 
           {/* Right Column - Leadership Grid */}
           <SectionFadeIn direction="right" delay={0.2}>
-            <div className="flex flex-col items-center w-full">
+            <div className="flex flex-col items-center w-full mt-16">
               {/* Row 1: 2 leaders */}
               <div className="flex justify-center mb-4 w-full">
                 <div className="flex space-x-6 md:space-x-8">
