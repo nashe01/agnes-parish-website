@@ -15,7 +15,6 @@ interface Guild {
 }
 
 const GuildsDisplay = () => {
-  const [guildsExpanded, setGuildsExpanded] = useState(false);
   const [guilds, setGuilds] = useState<Guild[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,27 +49,6 @@ const GuildsDisplay = () => {
 
         {guilds.length === 0 ? (
           <div className="text-center text-gray-600 mb-12">No guilds available right now.</div>
-        ) : !guildsExpanded ? (
-          <div className="mb-8">
-            <div className="flex overflow-hidden">
-              <div className="flex animate-scroll-left-35">
-                {[...guilds, ...guilds].map((g, i) => (
-                  <div key={g.id + '-' + i} className="flex-shrink-0 mx-4 flex flex-col items-center">
-                    <div className="w-48 rounded-lg overflow-hidden shadow-lg">
-                      <AspectRatio ratio={16 / 9}>
-                        <img
-                          src={g.image_url || "/placeholder.svg"}
-                          alt={g.name}
-                          className="object-cover w-full h-full"
-                        />
-                      </AspectRatio>
-                    </div>
-                    <p className="text-center mt-2 font-medium">{g.name}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
             {guilds.map((g, index) => (
@@ -111,17 +89,6 @@ const GuildsDisplay = () => {
             ))}
           </div>
         )}
-
-        <div className="text-center">
-          <button
-            onClick={() => {
-              setGuildsExpanded(!guildsExpanded);
-            }}
-            className="bg-gradient-to-r from-sky-500 to-sky-800 hover:from-sky-600 hover:to-sky-900 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            {guildsExpanded ? 'Show Less' : 'All Guilds'}
-          </button>
-        </div>
       </div>
     </section>
   );
