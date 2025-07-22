@@ -22,16 +22,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    console.log('Setting up auth state listener...');
-    
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          console.log('Checking admin status for user:', session.user.id);
           setTimeout(async () => {
             try {
               const { data, error } = await supabase
@@ -42,12 +38,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 .single();
               
               if (error) {
-                console.log('Admin check error:', error);
+                setIsAdmin(false);
               } else {
-                console.log('Admin check result:', data);
+                setIsAdmin(!!data); // Only set admin if data exists
               }
-              
-              setIsAdmin(true); // Make all users admin
             } catch (err) {
               console.error('Error checking admin status:', err);
               setIsAdmin(false);
@@ -62,7 +56,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('Initial session:', session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoading(false);

@@ -74,15 +74,15 @@ const Gallery = () => {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (selectedPhoto) {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') nextPhoto();
-      if (e.key === 'ArrowLeft') prevPhoto();
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedPhoto) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'ArrowLeft') prevPhoto();
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [selectedPhoto, lightboxIndex]);
